@@ -50,7 +50,7 @@ class EventController extends MyBaseController
 
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
-        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat('d-m-Y H:i',
+        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
             $request->get('start_date')) : null;
 
         /*
@@ -83,7 +83,7 @@ class EventController extends MyBaseController
             $event->location_is_manual = 1;
         }
 
-        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat('d-m-Y H:i',
+        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
             $request->get('end_date')) : null;
 
         $event->currency_id = Auth::user()->account->currency_id;
@@ -226,7 +226,7 @@ class EventController extends MyBaseController
         $event->is_live = $request->get('is_live');
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
-        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat('d-m-Y H:i',
+        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
             $request->get('start_date')) : null;
 
         /*
@@ -268,7 +268,7 @@ class EventController extends MyBaseController
             }
         }
 
-        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat('d-m-Y H:i',
+        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
             $request->get('end_date')) : null;
 
         if ($request->get('remove_current_image') == '1') {

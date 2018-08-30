@@ -11,6 +11,7 @@ return [
     'payment_gateway_dummy'    => 0,
     'payment_gateway_stripe'   => 1,
     'payment_gateway_paypal'   => 2,
+    'payment_gateway_bluepay'  => 6,
     'fake_card_data' => [
         'number' => '4242424242424242',
         'expiryMonth' => '6',
@@ -59,15 +60,19 @@ return [
     'question_radio_single'         => 6,
 
 
-    'default_timezone'           => 30, #Europe/Dublin
-    'default_currency'           => 2, #Euro
+    'default_timezone'           => 30, #America/Los_Angeles
+    'default_currency'           => 2, #Dollar
     'default_date_format'        => 'Y-m-d',
-    'default_date_picker_format' => 'Y-m-d',
-    'default_datetime_format'    => 'Y-m-d, H:i',
+    'default_date_picker_format' => 'MM-dd-yyyy hh:mm AA',
+    'default_datetime_format'    => 'm-d-Y h:i a',
     'default_query_cache'        => 120, #Minutes
     'default_locale'             => 'en',
-    'default_payment_gateway'    => 1, #Stripe=1 Paypal=2 BitPay=3 MIGS=4
+    'default_payment_gateway'    => 6, #Stripe=1 Paypal=2 BitPay=3 MIGS=4 firstdata=5 bluepay=6
 
     'cdn_url_user_assets'   => '',
-    'cdn_url_static_assets' => ''
+    'cdn_url_static_assets' => '',
+
+    'display_datetime_format' => 'M j, Y h:i a',
+    'display_date_format'     => 'M j, Y',
+    'display_time_format'     => 'h:i a'
 ];

@@ -77,6 +77,26 @@
 
 </section>
 
+{{--BluePay--}}
+<section class="payment_gateway_options"  id="gateway_{{config('attendize.payment_gateway_bluepay')}}">
+    <h4>@lang("ManageAccount.bluepay_service_settings")</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {!! Form::label('bluepay[accountId]', trans("ManageAccount.bluepay_api_key"), array('class'=>'control-label ')) !!}
+                {!! Form::text('bluepay[accountId]', $account->getGatewayConfigVal(config('attendize.payment_gateway_bluepay'), 'accountId'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {!! Form::label('bluepay[secretKey]', trans("ManageAccount.bluepay_api_secret"), ['class'=>'control-label ']) !!}
+                {!! Form::text('bluepay[secretKey]', $account->getGatewayConfigVal(config('attendize.payment_gateway_bluepay'), 'secretKey'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel-footer">

@@ -2,7 +2,7 @@
     <div class="panel-heading" data-style="background-color: {{{$event->bg_color}}};background-image: url({{{$event->bg_image_url}}}); background-size: cover;">
         <div class="event-date">
             <div class="month">
-                {{strtoupper(explode("|", trans("basic.months_short"))[$event->start_date->format('n')])}}
+                {{strtoupper(explode("|", trans("basic.months_short"))[$event->start_date->format('n')-1])}}
             </div>
             <div class="day">
                 {{$event->start_date->format('d')}}

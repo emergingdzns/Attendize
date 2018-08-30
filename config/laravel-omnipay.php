@@ -19,6 +19,9 @@ return [
             'driver'  => 'Stripe',
             'options' => [],
         ],
+        'bluepay' => [
+            'driver' => 'Bluepay',
+        ],
     ],
 
 ];

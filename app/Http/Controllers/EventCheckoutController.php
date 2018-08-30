@@ -394,6 +394,22 @@ class EventCheckoutController extends Controller
                             'receipt_email' => $request->get('order_email'),
                         ];
                         break;
+                    case config('attendize.payment_gateway_bluepay'):
+
+                        $cardData = [
+                            'number' => $request->get('card-number'),
+                            'expiryMonth' => $request->get('card-expiry-month'),
+                            'expiryYear' => $request->get('card-expiry-year'),
+                            'cvv' => $request->get('card-cvc'),
+                            'email' => $request->get('order_email'),
+                            'firstName' => $request->get('order_first_name'),
+                            'lastName' => $request->get('order_last_name')
+                        ];
+
+                        $card = new \Omnipay\Common\CreditCard($cardData);
+                        $gateway->setCard($card);
+                        $transaction_data['memo'] = $event->organiser->name.' - '.$event->title;
+                        break;
                     default:
                         Log::error('No payment gateway configured.');
                         return repsonse()->json([
@@ -412,7 +428,11 @@ class EventCheckoutController extends Controller
                     session()->push('ticket_order_' . $event_id . '.transaction_id',
                         $response->getTransactionReference());
 
-                    return $this->completeOrder($event_id);
+                    if ($event->account->active_payment_gateway->name == 'Stripe') {
+                        return $this->completeOrder($event_id);
+                    } else {
+                        return $this->completeOrder($event_id,false);
+                    }
 
                 } elseif ($response->isRedirect()) {
 

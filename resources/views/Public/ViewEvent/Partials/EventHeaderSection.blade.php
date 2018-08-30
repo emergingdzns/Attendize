@@ -24,14 +24,14 @@
             <h1 property="name">{{$event->title}}</h1>
             <div class="event_venue">
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    {{ $event->start_date->format('d.m H:i') }}
+                    {{ $event->start_date->format(config('attendize.display_datetime_format')) }}
                 </span>
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
-                     @if($event->start_date->diffInHours($event->end_date) <= 12)
-                        {{ $event->end_date->format('H:i') }}
+                     @if($event->start_date->diffInDays($event->end_date) == 0)
+                        {{ $event->end_date->format('h:i a') }}
                      @else
-                        {{ $event->end_date->format('d.m H:i') }}
+                        {{ $event->end_date->format('M j, Y H:i') }}
                      @endif
                 </span>
                 @lang("Public_ViewEvent.at")

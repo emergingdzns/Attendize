@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Log;
 use App\Mailers\OrderMailer;
 use App\Models\Order;
 use Illuminate\Contracts\Queue\ShouldQueue;

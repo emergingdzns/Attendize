@@ -58,8 +58,11 @@
         </div>
         <div class="col-md-8 col-md-pull-4">
             <div class="event_order_form">
-                {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $event->id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
-
+                @if($event->account->active_payment_gateway->name == 'Stripe')
+                    {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $event->id]), 'class' => ($order_requires_payment && @$payment_gateway->is_on_site) ? 'ajax payment-form' : 'ajax', 'data-stripe-pub-key' => isset($account_payment_gateway->config['publishableKey']) ? $account_payment_gateway->config['publishableKey'] : '']) !!}
+                @else
+                    {!! Form::open(['url' => route('postCreateOrder', ['event_id' => $event->id]), 'class' => 'payment-form']) !!}
+                @endif
                 {!! Form::hidden('event_id', $event->id) !!}
 
                 <h3> @lang("Public_ViewEvent.your_information")</h3>
@@ -179,7 +182,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('card-number', trans("Public_ViewEvent.card_number")) !!}
-                                    <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
+                                    @if($payment_gateway->name != 'Stripe')
+                                        <input name="card-number" required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
+                                    @else
+                                        <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -205,8 +212,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('card-expiry-year', trans("Public_ViewEvent.cvc_number")) !!}
-                                    <input required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
+                                    {!! Form::label('card-cvc-number', trans("Public_ViewEvent.cvc_number")) !!}
+                                    @if($payment_gateway->name != 'Stripe')
+                                        <input name="card-cvc" required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
+                                    @else
+                                        <input required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -30,8 +30,8 @@ class MyBaseController extends Controller
             /*
              * @todo These should be user selectable
              */
-            'DateFormat'          => 'dd-MM-yyyy',
-            'DateTimeFormat'      => 'dd-MM-yyyy hh:mm',
+            'DateFormat'          => config('attendize.default_date_format'), //'dd-MM-yyyy',
+            'DateTimeFormat'      => config('attendize.default_date_picker_format'), //'dd-MM-yyyy hh:mm',
             'GenericErrorMessage' => trans("Controllers.whoops"),
         ]);
         /*

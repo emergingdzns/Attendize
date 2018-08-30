@@ -45,6 +45,14 @@ class PaymentGatewaySeeder extends Seeder
                 'is_on_site' => 0,
                 'can_refund' => 0,
             ],
+            [
+                'id' => 6,
+                'name' => 'BluePay',
+                'provider_name' => 'Blue Pay',
+                'provider_url' => 'https://www.bluepay.com/',
+                'is_on_site' => 1,
+                'can_refund' => 1,
+            ],
         ];
 
         DB::table('payment_gateways')->insert($payment_gateways);
