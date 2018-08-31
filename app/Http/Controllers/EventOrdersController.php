@@ -222,6 +222,8 @@ class EventOrdersController extends MyBaseController
 
         $order = Order::scope()->findOrFail($order_id);
 
+        Log::info($order);
+
         $refund_order = ($request->get('refund_order') === 'on') ? true : false;
         $refund_type = $request->get('refund_type');
         $refund_amount = round(floatval($request->get('refund_amount')), 2);
@@ -247,7 +249,8 @@ class EventOrdersController extends MyBaseController
                 try {
                     $gateway = Omnipay::create($order->payment_gateway->name);
 
-                    $gateway->initialize($order->account->getGateway($order->payment_gateway->id)->config);
+                    $gateway->initialize($order->account->getGateway($order->payment_gateway->id)->config + [
+                            'testMode' => config('attendize.enable_test_payments')]);
 
                     if ($refund_type === 'full') { /* Full refund */
                         $refund_amount = $order->organiser_amount - $order->amount_refunded;
