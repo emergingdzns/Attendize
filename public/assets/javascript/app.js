@@ -245,7 +245,6 @@ $(function () {
         e.preventDefault();
     });
 
-
     $(document.body).on('click', '.pauseTicketSales', function (e) {
 
         var ticketId = $(this).data('id'),

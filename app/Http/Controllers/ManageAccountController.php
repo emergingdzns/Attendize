@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\AccountPaymentGateway;
 use App\Models\Currency;
+use App\Models\Organiser;
 use App\Models\PaymentGateway;
 use App\Models\Timezone;
 use App\Models\User;
@@ -31,6 +32,7 @@ class ManageAccountController extends MyBaseController
             'account'                  => Account::find(Auth::user()->account_id),
             'timezones'                => Timezone::pluck('location', 'id'),
             'currencies'               => Currency::pluck('title', 'id'),
+            'organisers'               => Organiser::pluck('name', 'id'),
             'payment_gateways'         => PaymentGateway::pluck('provider_name', 'id'),
             'account_payment_gateways' => AccountPaymentGateway::scope()->get(),
             'version_info'             => $this->getVersionInfo(),
@@ -199,6 +201,10 @@ class ManageAccountController extends MyBaseController
         $user->account_id = Auth::user()->account_id;
 
         $user->save();
+
+        if (Input::has('organisers')) {
+            $user->organisers()->sync(Input::get('organisers'));
+        }
 
         $data = [
             'user'          => $user,

@@ -84,6 +84,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Get the organisers for user - if any.
+     *
+     * @return mixed
+     */
+    public function organisers()
+    {
+        return $this->belongsToMany(\App\Models\Organiser::class);
+    }
+
+    /**
      * Get the password for the user.
      *
      * @return string

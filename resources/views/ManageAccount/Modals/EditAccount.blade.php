@@ -121,15 +121,19 @@
                                         @endforeach
                                         <tr>
                                             <td colspan="3">
-                                                <div class="input-group">
-                                                    {!! Form::text('email', '',  ['class' => 'form-control', 'placeholder' => trans("ManageAccount.email_address_placeholder")]) !!}
-                                                    <span class="input-group-btn">
-                                                          {!!Form::submit(trans("ManageAccount.add_user_submit"), ['class' => 'btn btn-primary'])!!}
-                                                    </span>
-                                                </div>
-                                                <span class="help-block">
-                                                    @lang("ManageAccount.add_user_help_block")
-                                                </span>
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td width="40%">
+                                                            {!! Form::text('email', '',  ['class' => 'form-control', 'placeholder' => trans("ManageAccount.email_address_placeholder")]) !!}
+                                                        </td>
+                                                        <td width="40%">
+                                                            {!! Form::select('organisers', $organisers, null, ['multiple' => 'multiple', 'id' => 'select-organisers', 'class' => 'form-control', 'placeholder' => trans("ManageAccount.select_organisers_placeholder")]) !!}
+                                                        </td>
+                                                        <td width="20%">
+                                                            {!!Form::submit(trans("ManageAccount.add_user_submit"), ['class' => 'btn btn-primary'])!!}
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
 
                                         </tr>

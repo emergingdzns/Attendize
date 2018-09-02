@@ -20,6 +20,7 @@ return array (
   'default_payment_gateway' => 'Default payment gateway',
   'email' => 'Email',
   'email_address_placeholder' => 'Email address',
+  'select_organisers_placeholder' => 'All Organisers',
   'first_name' => 'First name',
   'general' => 'General',
   'last_name' => 'Last name',
