@@ -6,7 +6,7 @@ return [
 
     'ticket_status_sold_out'        => 1,
     'ticket_status_after_sale_date' => 2,//
-    'enable_test_payments'          => env('ENABLE_TEST_PAYMENTS', true),
+    'enable_test_payments'          => env('ENABLE_TEST_PAYMENTS', false),
     'enable_dummy_payment_gateway'  => false,
     'payment_gateway_dummy'    => 0,
     'payment_gateway_stripe'   => 1,
@@ -60,14 +60,14 @@ return [
     'question_radio_single'         => 6,
 
 
-    'default_timezone'           => 30, #America/Los_Angeles
-    'default_currency'           => 2, #Dollar
-    'default_date_format'        => 'Y-m-d',
-    'default_date_picker_format' => 'MM-dd-yyyy hh:mm AA',
-    'default_datetime_format'    => 'm-d-Y h:i a',
+    'default_timezone'           => 30, #Europe/Dublin
+    'default_currency'           => 2, #Euro
+    'default_date_format'        => env('DEFAULT_DATE_FORMAT','Y-m-d'),
+    'default_date_picker_format' => env('DEFAULT_DATEPICKER_FORMAT','MM-dd-yyyy hh:mm AA'),
+    'default_datetime_format'    => env('DEFAULT_DATETIME_FORMAT','m-d-Y h:i a'),
     'default_query_cache'        => 120, #Minutes
     'default_locale'             => 'en',
-    'default_payment_gateway'    => 6, #Stripe=1 Paypal=2 BitPay=3 MIGS=4 firstdata=5 bluepay=6
+    'default_payment_gateway'    => env('DEFAULT_PAYMENT_GATEWAY',6), #Stripe=1 Paypal=2 BitPay=3 MIGS=4 bluepay=6
 
     'cdn_url_user_assets'   => '',
     'cdn_url_static_assets' => '',

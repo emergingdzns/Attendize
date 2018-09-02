@@ -1,8 +1,9 @@
 @extends('Public.ViewEvent.Layouts.EmbeddedEventPage')
 
 @section('head')
-
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    @if($event->account->active_payment_gateway->name == 'Stripe')
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    @endif
 @stop
 
 @section('content')
