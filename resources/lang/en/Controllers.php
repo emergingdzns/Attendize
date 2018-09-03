@@ -115,4 +115,9 @@ return array (
   'tickets_for_event' => 'Your tickets for the event :event.',
   'whoops' => 'Whoops! Looks like something went wrong. Please try again.',
   'your_password_reset_link' => 'Your Password Reset Link',
+  'error_not_admin' => 'You are not an admin.',
+  'error_no_user_id' => 'No user identifier supplied.',
+  'error_can_not_delete_self' => 'You can not delete yourself.',
+  'error_can_not_find_user' => 'The user requested could not be found.',
+  'error_not_allowed_to_edit' => 'You do not have the authority to edit this user.',
 );

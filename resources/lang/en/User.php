@@ -33,5 +33,5 @@ return array (
   'terms_and_conditions' => '&nbsp;&nbsp;I agree to <a target="_blank" href=":url"> Terms & Conditions </a>',
   'welcome_to_app' => 'Welcome to :app!',
   'your_email' => 'Your Email',
-  'assigned_to_organiser' => 'Assigned to Organiser(s)'
+  'assigned_to_organiser' => 'Assigned to Organiser(s)',
 );

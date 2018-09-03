@@ -42,8 +42,10 @@ class UserController extends Controller
      */
     public function postEditUser(Request $request)
     {
-        if (@$request->get('user_id')) {
+        if (@$request->get('user_id') && (Auth::user()->isAdmin() || Auth::user()->id == $request->get('user_id'))) {
             $user = User::find($request->get('user_id'));
+        } else {
+            response->json(['status' => 'error', 'message' => trans("Controllers.error_not_admin")]);
         }
 
         $rules = [
@@ -108,20 +110,20 @@ class UserController extends Controller
     {
         // To Do: make these strings translations
         if (Auth::user()->isAdmin() === false) {
-            return response()->json(['status'=>'error','message'=>'You are not an admin.']);
+            return response()->json(['status'=>'error','message'=>trans("Controllers.error_not_admin")]);
         }
 
         if (!@$request->get('user_id')) {
-            return response()->json(['status'=>'error','message'=>'No user identifier supplied.']);
+            return response()->json(['status'=>'error','message'=>trans("Controllers.error_no_user_id")]);
         }
 
         if (Auth::user()->id == $request->get('user_id')) {
-            return response()->json(['status'=>'error','message'=>'You can not delete yourself.']);
+            return response()->json(['status'=>'error','message'=>trans("Controllers.error_can_not_delete_self")]);
         }
 
         $user = User::find($request->get('user_id'));
         if (!@$user) {
-            return response()->json(['status'=>'error','message'=>'The user requested could not be found.']);
+            return response()->json(['status'=>'error','message'=>trans("Controllers.error_can_not_find_user")]);
         } else {
             $user->organisers()->sync([]);
             $user->delete();
