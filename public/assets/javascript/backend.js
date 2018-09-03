@@ -10883,10 +10883,9 @@ $.cf = {
                 });
 
                 $modal.on('shown.bs.modal', function (e) {
-                    console.log('modal opened' + $modal.find('modal-dialog').attr('class'));
                     if ($('.modal-dialog.account_settings').size() > 0) {
-                        console.log('has the class we need');
-                        $('select#select-organisers').multiselect();
+                        $('.modal-dialog').addClass('modal-lg');
+                        $('select#select-organisers').multiselect({'buttonClass':'btn btn-info'});
                         $('select#select-organisers').hide();
                     }
                 });
@@ -10923,7 +10922,7 @@ $.cf = {
      * </a>
      *
      */
-    $('.deleteThis').on('click', function (e) {
+    $(document.body).on('click', '.deleteThis', function (e) {
 
         /*
          * Confirm if the user wants to delete this object
@@ -10934,14 +10933,16 @@ $.cf = {
             var that = $(this);
             setTimeout(function () {
                 that.data('confirm-delete', 'no').html(that.data('original-text'));
-            }, 2000);
+            }, 10000);
 
             return;
         }
 
         var deleteId = $(this).data('id'),
             deleteType = $(this).data('type'),
-            route = $(this).data('route');
+            route = $(this).data('route'),
+            afterAction = $(this).data('after-action'),
+            afterActionEl = $(this).data('element');
 
         $.post(route, deleteType + '_id=' + deleteId)
             .done(function (data) {
@@ -10953,6 +10954,9 @@ $.cf = {
                 switch (data.status) {
                     case 'success':
                         $('#' + deleteType + '_' + deleteId).fadeOut();
+                        if (afterAction == 'removeElem') {
+                            removeElem(afterActionEl);
+                        }
                         break;
                     case 'error':
                         /* Error */
@@ -11285,4 +11289,12 @@ function showHelp(message) {
 
 function hideMessage() {
     humane.remove();
+}
+
+function removeElem(element) {
+    $(element).remove();
+}
+
+function appendData(parentDomObject,appendHtml) {
+    $(parentDomObject).append(appendHtml);
 }

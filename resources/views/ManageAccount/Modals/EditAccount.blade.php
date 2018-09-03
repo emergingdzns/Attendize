@@ -103,10 +103,9 @@
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
-
-                                        <tbody>
+                                        <tbody id="users-table">
                                         @foreach($account->users as $user)
-                                            <tr>
+                                            <tr id="user-{{ $user->id  }}">
                                                 <td>
                                                     {{$user->first_name}} {{$user->last_name}}
                                                 </td>
@@ -114,20 +113,37 @@
                                                     {{$user->email}}
                                                 </td>
                                                 <td>
-                                                    {!! $user->is_parent ? '<span class="label label-info">'.trans("ManageAccount.accout_owner").'</span>' : '' !!}
+                                                    {!! ($user->is_parent === 1 ?
+                                                        '<span class="label label-danger">'.trans("ManageAccount.accout_owner").'</span>' :
+                                                            ($user->organisers()->count() == 0 ?
+                                                            '<span class="label label-primary">'.trans("ManageAccount.account_admin").'</span>':'<span class="label label-info">'.trans("ManageAccount.account_user").'</span>')) !!}
                                                 </td>
-
+                                                <td>
+                                                    @if ($user->organisers()->count() > 0)
+                                                    <?php $organiserNames=[]; ?>
+                                                        @foreach($user->organisers as $org)
+                                                            <?php $organiserNames[] = $org->name; ?>
+                                                        @endforeach
+                                                        {{ implode(', ',$organiserNames) }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a data-href="{{route('showEditUser',[$user->id])}}" data-modal-id="EditUser" class="loadModal btn btn-primary" href="javascript:void(0);"><i class="ico-edit"></i></a>
+                                                    <a href="#" data-route="{{route('deleteUser')}}" data-id="{{ $user->id }}" data-type='user' data-after-action="removeElem" data-element="tr#user-{{ $user->id }}" class="deleteThis btn btn-danger"><i class="ico-remove"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
+                                        </tbody>
+                                        <tfoot>
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="5">
                                                 <table width="100%">
                                                     <tr>
                                                         <td width="40%">
                                                             {!! Form::text('email', '',  ['class' => 'form-control', 'placeholder' => trans("ManageAccount.email_address_placeholder")]) !!}
                                                         </td>
                                                         <td width="40%">
-                                                            {!! Form::select('organisers', $organisers, null, ['multiple' => 'multiple', 'id' => 'select-organisers', 'class' => 'form-control', 'placeholder' => trans("ManageAccount.select_organisers_placeholder")]) !!}
+                                                            {!! Form::select('organisers[]', $organisers, null, ['multiple' => 'multiple', 'id' => 'select-organisers', 'class' => 'form-control', 'placeholder' => trans("ManageAccount.select_organisers_placeholder")]) !!}
                                                         </td>
                                                         <td width="20%">
                                                             {!!Form::submit(trans("ManageAccount.add_user_submit"), ['class' => 'btn btn-primary'])!!}
@@ -137,8 +153,7 @@
                                             </td>
 
                                         </tr>
-
-                                        </tbody>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 {!! Form::close() !!}

@@ -41,12 +41,14 @@
                     <span class="text">@lang("basic.promote")</span>
                 </a>
             </li>
+            @if(Auth::user()->isAdmin())
             <li class="{{ Request::is('*customize*') ? 'active' : '' }}">
                 <a href="{{route('showEventCustomize', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-cog"></i></span>
                     <span class="text">@lang("basic.customize")</span>
                 </a>
             </li>
+            @endif
         </ul>
         <h5 class="heading">@lang("ManageEvent.event_tools")</h5>
         <ul id="nav_event" class="topmenu">
@@ -56,6 +58,7 @@
                     <span class="text">@lang("ManageEvent.check-in")</span>
                 </a>
             </li>
+            @if(Auth::user()->isAdmin())
             <li class="{{ Request::is('*surveys*') ? 'active' : '' }}">
                 <a href="{{route('showEventSurveys', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-question"></i></span>
@@ -68,5 +71,6 @@
                     <span class="text">@lang("ManageEvent.widgets")</span>
                 </a>
             </li>
+            @endif
     </section>
 </aside>

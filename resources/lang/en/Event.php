@@ -32,6 +32,7 @@ return array (
   'n_attendees_for_event' => '<b>:num</b> Attendee(s) for event: <b>:name</b> (:date)',
   'no_events_yet' => 'No Event Yet!',
   'no_events_yet_text' => 'Looks like you have yet to create an event. You can create one by clicking the button below.',
+  'non_admin_events_yet_text' => 'There are no events created yet. Only administrators can add events.',
   'num_events' => ':num Events',
   'or(manual/existing_venue)' => 'or',
   'post_code' => 'Post Code',

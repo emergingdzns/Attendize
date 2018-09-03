@@ -38,14 +38,16 @@
             </li>
         </ul>
     </div>
+
     <div class="panel-footer">
         <ul class="nav nav-section nav-justified">
+            @if(Auth::user()->isAdmin())
             <li>
                 <a href="{{route('showEventCustomize', ['event_id' => $event->id])}}">
                     <i class="ico-edit"></i> @lang("basic.edit")
                 </a>
             </li>
-
+            @endif
             <li>
                 <a href="{{route('showEventDashboard', ['event_id' => $event->id])}}">
                     <i class="ico-cog"></i> @lang("basic.manage")
@@ -53,4 +55,5 @@
             </li>
         </ul>
     </div>
+
 </div>

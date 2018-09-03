@@ -15,13 +15,14 @@
                     <span class="text">@lang("Organiser.event")</span>
                 </a>
             </li>
-
+@if(Auth::user()->isAdmin())
             <li class="{{ Request::is('*customize*') ? 'active' : '' }}">
                 <a href="{{route('showOrganiserCustomize', array('organiser_id' => $organiser->id))}}">
                     <span class="figure"><i class="ico-cog"></i></span>
                     <span class="text">@lang("Organiser.customize")</span>
                 </a>
             </li>
+@endif
         </ul>
     </section>
 </aside>

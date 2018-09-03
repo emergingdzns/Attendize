@@ -27,6 +27,7 @@ return array (
   'name' => 'Name',
   'no_tickets_yet' => 'No Tickets Yet',
   'no_tickets_yet_text' => 'Create your first ticket by clicking the button below.',
+  'non_admin_no_tickets_yet_text' => 'There are no tickets created yet. Only administrators can add tickets.',
   'order_ref' => 'Order Ref.',
   'organiser' => 'Organiser',
   'pause' => 'Pause',

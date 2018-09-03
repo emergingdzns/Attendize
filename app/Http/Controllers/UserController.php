@@ -7,6 +7,9 @@ use Hash;
 use Illuminate\Http\Request;
 use Validator;
 
+use App\Models\User;
+use App\Models\Organiser;
+
 class UserController extends Controller
 {
     /**
@@ -14,11 +17,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function showEditUser()
+    public function showEditUser($userId = null)
     {
-        $data = [
-            'user' => Auth::user(),
-        ];
+        if ($userId) {
+            $data = [
+                'user' => User::find($userId),
+            ];
+        } else {
+            $data = [
+                'user' => Auth::user(),
+            ];
+        }
+
+        $data['organisers'] = Organiser::scope()->get();
 
         return view('ManageUser.Modals.EditUser', $data);
     }
@@ -31,11 +42,15 @@ class UserController extends Controller
      */
     public function postEditUser(Request $request)
     {
+        if (@$request->get('user_id')) {
+            $user = User::find($request->get('user_id'));
+        }
+
         $rules = [
             'email'        => [
                 'required',
                 'email',
-                'unique:users,email,' . Auth::user()->id . ',id,account_id,' . Auth::user()->account_id
+                'unique:users,email,' . $user->id . ',id,account_id,' . $user->account_id
             ],
             'new_password' => ['min:5', 'confirmed', 'required_with:password'],
             'password'     => 'passcheck',
@@ -61,8 +76,6 @@ class UserController extends Controller
             ]);
         }
 
-        $user = Auth::user();
-
         if ($request->get('password')) {
             $user->password = Hash::make($request->get('new_password'));
         }
@@ -71,11 +84,49 @@ class UserController extends Controller
         $user->last_name = $request->get('last_name');
         $user->email = $request->get('email');
 
+        if ($request->has('organisers') && count($request->get('organisers') > 0)) {
+            $organisers = [];
+            foreach($request->get('organisers') as $org) {
+                if ($org != '') {
+                    $organisers[] = $org;
+                }
+            }
+            if (count($organisers) > 0) {
+                $user->organisers()->sync($organisers);
+            }
+        }
+
         $user->save();
 
         return response()->json([
             'status'  => 'success',
             'message' => trans("Controllers.successfully_saved_details"),
         ]);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        // To Do: make these strings translations
+        if (Auth::user()->isAdmin() === false) {
+            return response()->json(['status'=>'error','message'=>'You are not an admin.']);
+        }
+
+        if (!@$request->get('user_id')) {
+            return response()->json(['status'=>'error','message'=>'No user identifier supplied.']);
+        }
+
+        if (Auth::user()->id == $request->get('user_id')) {
+            return response()->json(['status'=>'error','message'=>'You can not delete yourself.']);
+        }
+
+        $user = User::find($request->get('user_id'));
+        if (!@$user) {
+            return response()->json(['status'=>'error','message'=>'The user requested could not be found.']);
+        } else {
+            $user->organisers()->sync([]);
+            $user->delete();
+            return response()->json(['status'=>'success']);
+        }
+
     }
 }

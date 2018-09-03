@@ -199,13 +199,17 @@ Route::group(
          */
         Route::group(['prefix' => 'user'], function () {
 
-            Route::get('/', [
+            Route::get('/{userId?}', [
                 'as'   => 'showEditUser',
                 'uses' => 'UserController@showEditUser',
             ]);
             Route::post('/', [
                 'as'   => 'postEditUser',
                 'uses' => 'UserController@postEditUser',
+            ]);
+            Route::post('/delete', [
+                'as'   => 'deleteUser',
+                'uses' => 'UserController@deleteUser'
             ]);
 
         });

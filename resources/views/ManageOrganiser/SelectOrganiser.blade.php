@@ -26,17 +26,21 @@
                     <h5>@lang("Organiser.continue_to"):</h5>
                     <div class="list-group">
                         @foreach($organisers as $organiser)
+                            @if (Auth::user()->isOrganiserUser($organiser->id) || Auth::user()->isAdmin())
                             <a href="{{route('showOrganiserDashboard', ['organiser_id'=>$organiser->id] )}}"
                                class="list-group-item">
                                 {{$organiser->name}}
                             </a>
+                            @endif
                         @endforeach
                     </div>
 
-                    <div style="margin-top:-15px; padding: 10px; text-align: center;">
-                        @lang("Organiser.or_caps")
-                    </div>
-                    <a style="color: white;" href="{{route('showCreateOrganiser')}}" class="btn btn-block btn-success">@lang("Organiser.create_new_organiser")</a>
+                    @if(Auth::user()->isAdmin())
+                        <div style="margin-top:-15px; padding: 10px; text-align: center;">
+                            @lang("Organiser.or_caps")
+                        </div>
+                        <a style="color: white;" href="{{route('showCreateOrganiser')}}" class="btn btn-block btn-success">@lang("Organiser.create_new_organiser")</a>
+                    @endif
                 </div>
             </div>
         </div>

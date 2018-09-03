@@ -14,6 +14,7 @@ use Hash;
 use HttpClient;
 use Illuminate\Http\Request;
 use Input;
+use Log;
 use Mail;
 use Validator;
 use GuzzleHttp\Client;
@@ -202,9 +203,31 @@ class ManageAccountController extends MyBaseController
 
         $user->save();
 
-        if (Input::has('organisers')) {
-            $user->organisers()->sync(Input::get('organisers'));
+        if (Input::has('organisers') && count(Input::get('organisers') > 0)) {
+            $organisers = [];
+            $organiserNames = [];
+            foreach(Input::get('organisers') as $org) {
+                if ($org != '') {
+                    $organiser = Organiser::find($org);
+                    $organiserNames[] = $organiser->name;
+                    $organisers[] = $org;
+                }
+            }
+            if (count($organisers) > 0) {
+                $user->organisers()->sync($organisers);
+                $label = '<label class="label label-info">Assigned User</label>';
+                $organiserList = implode(', ',$organiserNames);
+            } else {
+                $label = '<label class="label label-primary">Admin</label>';
+                $organiserList = '';
+            }
+        } else {
+            $label = '<label class="label label-primary">Admin</label>';
+            $organiserList = '';
         }
+
+        $editLink = '<a data-href="'.route('showEditUser',[$user->id]).'" data-modal-id="EditUser" class="loadModal btn btn-primary" href="javascript:void(0);"><i class="ico-edit"></i></a>';
+        $removeLink = '<a href="#" data-route="'.route('deleteUser').'" data-id="'.$user->id.'" data-type="user" data-after-action="removeElem" data-element="tr#user-'.$user->id.'" class="deleteThis btn btn-danger"><i class="ico-remove"></i></a>';
 
         $data = [
             'user'          => $user,
@@ -220,6 +243,7 @@ class ManageAccountController extends MyBaseController
         return response()->json([
             'status'  => 'success',
             'message' => trans("Controllers.success_name_has_received_instruction", ["name"=>$user->email]),
+            'runThis' => "appendData('tbody#users-table','<tr id=\"user-{$user->id}\"><td></td><td>{$user->email}</td><td>{$label}</td><td>{$organiserList}</td><td>{$editLink}{$removeLink}</td></tr>')"
         ]);
     }
 

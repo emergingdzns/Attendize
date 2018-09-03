@@ -57,34 +57,37 @@
 
 
                 <ul class="dropdown-menu" role="menu">
+                    @if(Auth::user()->isAdmin())
                     <li>
                         <a href="{{route('showCreateOrganiser')}}">
                             <i class="ico ico-plus"></i>
                             @lang("Top.create_organiser")
                         </a>
                     </li>
+                    @endif
                     @foreach($organisers as $org)
+                        @if (Auth::user()->isOrganiserUser($org->id))
                         <li>
                             <a href="{{route('showOrganiserDashboard', ['organiser_id' => $org->id])}}">
                                 <i class="ico ico-building"></i> &nbsp;
                                 {{$org->name}}
                             </a>
-
                         </li>
+                        @endif
                     @endforeach
-                    <li class="divider"></li>
 
+                    <li class="divider"></li>
                     <li>
                         <a data-href="{{route('showEditUser')}}" data-modal-id="EditUser"
                            class="loadModal editUserModal" href="javascript:void(0);"><span class="icon ico-user"></span>@lang("Top.my_profile")</a>
                     </li>
+
+                    @if(Auth::user()->isAdmin())
                     <li class="divider"></li>
                     <li><a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
                            href="javascript:void(0);"><span class="icon ico-cog"></span>@lang("Top.account_settings")</a></li>
+                    @endif
 
-
-                    <li class="divider"></li>
-                    <li><a target="_blank" href="https://www.attendize.com/feedback.php?v={{ config('attendize.version') }}"><span class="icon ico-megaphone"></span>@lang("Top.feedback_bug_report")</a></li>
                     <li class="divider"></li>
                     <li><a href="{{route('logout')}}"><span class="icon ico-exit"></span>@lang("Top.sign_out")</a></li>
                 </ul>

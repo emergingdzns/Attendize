@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Log;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -91,6 +92,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function organisers()
     {
         return $this->belongsToMany(\App\Models\Organiser::class);
+    }
+
+    /**
+     * Check to see if the user is the account owner or an admin
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        if ($this->is_parent || $this->organisers()->count() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check to see if user is part of the organiser
+     *
+     * @return boolean
+     */
+    public function isOrganiserUser($organiserId)
+    {
+        $orgs = $this->organisers;
+        $organisers = [];
+        foreach($orgs as $org) {
+            $organisers[] = $org->id;
+        }
+        if ($this->is_parent || in_array($organiserId,$organisers) ) {
+            return true;
+        }
+        return false;
     }
 
     /**

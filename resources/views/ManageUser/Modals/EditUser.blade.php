@@ -1,5 +1,6 @@
 <div role="dialog"  class="modal fade" style="display: none;">
     {!! Form::model($user, array('url' => route('postEditUser'), 'class' => 'ajax closeModalAfter')) !!}
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
         <div class="modal-dialog account_settings">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -21,7 +22,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('first_name', trans("User.first_name"), array('class'=>'control-label required')) !!}
-                                {!!  Form::text('first_name', Input::old('first_name'),
+                                {!! Form::text('first_name', Input::old('first_name'),
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}
@@ -30,7 +31,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('last_name', trans("User.last_name"), array('class'=>'control-label required')) !!}
-                                {!!  Form::text('last_name', Input::old('last_name'),
+                                {!! Form::text('last_name', Input::old('last_name'),
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}
@@ -41,12 +42,30 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {!! Form::label('email', trans("User.email"), array('class'=>'control-label required')) !!}
-                                {!!  Form::text('email', Input::old('email'),
+                                {!! Form::text('email', Input::old('email'),
                                             array(
                                             'class'=>'form-control '
                                             ))  !!}
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        @if(Auth::user()->isAdmin())
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans("User.assigned_to_organiser") }}</label>
+                                    @foreach($organisers as $org)
+                                        <div class="checkbox" style="padding:5px">
+                                            <label class="control-label"><input type="checkbox" name="organisers[]" value="{{ $org->id }}"
+                                                                                @if ($user->isOrganiserUser($org->id))
+                                                                                checked="checked"
+                                                        @endif
+                                                > {{ $org->name }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="row more-options">
@@ -54,21 +73,21 @@
 
                             <div class="form-group">
                                 {!! Form::label('password', trans("User.old_password"), array('class'=>'control-label')) !!}
-                                {!!  Form::password('password',
+                                {!! Form::password('password',
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('new_password', trans("User.new_password"), array('class'=>'control-label')) !!}
-                                {!!  Form::password('new_password',
+                                {!! Form::password('new_password',
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('new_password_confirmation', trans("User.confirm_new_password"), array('class'=>'control-label')) !!}
-                                {!!  Form::password('new_password_confirmation',
+                                {!! Form::password('new_password_confirmation',
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}

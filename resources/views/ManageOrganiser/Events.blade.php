@@ -25,9 +25,11 @@
 @section('page_header')
     <div class="col-md-9">
         <div class="btn-toolbar">
+            @if(Auth::user()->isAdmin())
             <div class="btn-group btn-group-responsive">
                 <a href="#" data-modal-id="CreateEvent" data-href="{{route('showCreateEvent', ['organiser_id' => @$organiser->id])}}" class="btn btn-success loadModal"><i class="ico-plus"></i> @lang("Event.create_event")</a>
             </div>
+            @endif
         </div>
     </div>
     <div class="col-md-3">

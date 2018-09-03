@@ -52,12 +52,14 @@
     <div class="col-md-9">
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar">
+            @if(Auth::user()->isAdmin())
             <div class="btn-group btn-group-responsive">
                 <button data-modal-id='CreateTicket'
                         data-href="{{route('showCreateTicket', array('event_id'=>$event->id))}}"
                         class='loadModal btn btn-success' type="button"><i class="ico-ticket"></i> @lang("Ticket.create_ticket")
                 </button>
             </div>
+            @endif
             @if(false)
                 <div class="btn-group btn-group-responsive ">
                     <button data-modal-id='TicketQuestions'
@@ -110,9 +112,15 @@
             @foreach($tickets as $ticket)
                 <div id="ticket_{{$ticket->id}}" class="col-md-4 col-sm-6 col-xs-12">
                     <div class="panel panel-success ticket" data-ticket-id="{{$ticket->id}}">
-                        <div style="cursor: pointer;" data-modal-id='ticket-{{ $ticket->id }}'
+                        <div style="cursor: pointer;"
+                             @if(Auth::user()->isAdmin())
+                             data-modal-id='ticket-{{ $ticket->id }}'
                              data-href="{{ route('showEditTicket', ['event_id' => $event->id, 'ticket_id' => $ticket->id]) }}"
-                             class="panel-heading loadModal">
+                             class="panel-heading loadModal"
+                             @else
+                             class="panel-heading"
+                             @endif
+                        >
                             <h3 class="panel-title">
                                 @if($ticket->is_hidden)
                                     <i title="@lang("Ticket.this_ticket_is_hidden")"

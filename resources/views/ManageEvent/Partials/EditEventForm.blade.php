@@ -114,9 +114,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    {{ config('attendize.default_datetime_format') }}
                     {!! Form::label('start_date', trans("Event.event_start_date"), array('class'=>'required control-label')) !!}
-                    {!!  Form::text('start_date', $event->getFormattedDate('start_date',config('attendize.default_datetime_format')),
+                    {!! Form::text('start_date', $event->getFormattedDate('start_date',config('attendize.default_datetime_format')),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',
                                                     'data-field'=>'datetime',
