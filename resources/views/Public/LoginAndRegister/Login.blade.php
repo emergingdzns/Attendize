@@ -8,9 +8,6 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel">
                 <div class="panel-body">
-                    <div class="logo">
-                        {!!HTML::image('assets/images/logo-dark.png')!!}
-                    </div>
 
                     @if(Session::has('failed'))
                         <h4 class="text-danger mt0">@lang("basic.whoops")! </h4>

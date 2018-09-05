@@ -9,9 +9,7 @@
         <div class="col-md-7 col-md-offset-2">
             {!! Form::open(array('url' => route("showSignup"), 'class' => 'panel')) !!}
             <div class="panel-body">
-                <div class="logo">
-                   {!! HTML::image('assets/images/logo-dark.png') !!}
-                </div>
+
                 <h2>@lang("User.sign_up")</h2>
 
                 @if(Input::get('first_run'))

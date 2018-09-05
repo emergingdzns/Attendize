@@ -20,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ url("assets/images/touch/mstile-144x144.png") }}">
     <meta name="msapplication-config" content="{{ url("assets/images/touch/browserconfig.xml") }}">
-    <meta name="application-name" content="Attendize">
+    <meta name="application-name" content="CRG Tickets">
     <meta name="_token" content="{{ csrf_token() }}" />
     {{--Mobile browser theme colors--}}
     <meta name="theme-color" content="#2E3254">

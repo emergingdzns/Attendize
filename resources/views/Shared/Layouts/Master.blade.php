@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--
-              _   _                 _ _
-         /\  | | | |               | (_)
-        /  \ | |_| |_ ___ _ __   __| |_ _______   ___ ___  _ __ ___
-       / /\ \| __| __/ _ \ '_ \ / _` | |_  / _ \ / __/ _ \| '_ ` _ \
-      / ____ \ |_| ||  __/ | | | (_| | |/ /  __/| (_| (_) | | | | | |
-     /_/    \_\__|\__\___|_| |_|\__,_|_/___\___(_)___\___/|_| |_| |_|
-
-    -->
     <title>
         @section('title')
-            Attendize ::
+            Cohn Restaurant Group ::
         @show
     </title>
 
@@ -38,7 +29,7 @@
 
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0);">
-            <img style="width: 150px;" class="logo" alt="Attendize" src="{{asset('assets/images/logo-light.png')}}"/>
+            CRG Tickets
         </a>
     </div>
 

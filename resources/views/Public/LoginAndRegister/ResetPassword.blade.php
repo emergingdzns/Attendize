@@ -11,9 +11,7 @@ Reset Password
            {!! Form::open(array('url' => route('postResetPassword'), 'class' => 'panel')) !!}
 
             <div class="panel-body">
-                <div class="logo">
-                   {!!HTML::image('assets/images/logo-dark.png')!!}
-                </div>
+
                 <h2>@lang("User.reset_password")</h2>
                 @if (Session::has('status'))
                 <div class="alert alert-info">
