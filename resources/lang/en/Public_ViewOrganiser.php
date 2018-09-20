@@ -11,7 +11,7 @@ return array (
   'tickets' => 'Tickets',
   //==================================== Translations ====================================//
   'no_events' => 'There are no :panel_title to display.',
-  'organiser_dashboard' => 'Organizer Dashboard',
+  'organiser_dashboard' => 'Location/Venue Dashboard',
   'past_events' => 'Past events',
   'upcoming_events' => 'Upcoming events',
 );

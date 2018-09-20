@@ -222,8 +222,6 @@ class EventOrdersController extends MyBaseController
 
         $order = Order::scope()->findOrFail($order_id);
 
-        Log::info($order);
-
         $refund_order = ($request->get('refund_order') === 'on') ? true : false;
         $refund_type = $request->get('refund_type');
         $refund_amount = round(floatval($request->get('refund_amount')), 2);

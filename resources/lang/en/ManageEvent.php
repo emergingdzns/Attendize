@@ -34,7 +34,7 @@ return array (
   'edit_question' => 'Edit Question',
   'edit_ticket' => 'Edit Ticket',
   'end_sale_on' => 'End Sale On',
-    'event_not_live_with_activate' => 'This event is not visible to the public. <a :style href=":url">Publish it</a>',
+  'event_not_live_with_activate' => 'This event is not visible to the public. <a :style href=":url">Publish it</a>',
   'event_page' => 'Event Page',
   'event_tools' => 'Event Tools',
   'export' => 'Export',
