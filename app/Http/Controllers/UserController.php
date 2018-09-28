@@ -45,7 +45,7 @@ class UserController extends Controller
         if (@$request->get('user_id') && (Auth::user()->isAdmin() || Auth::user()->id == $request->get('user_id'))) {
             $user = User::find($request->get('user_id'));
         } else {
-            response->json(['status' => 'error', 'message' => trans("Controllers.error_not_admin")]);
+            response()->json(['status' => 'error', 'message' => trans("Controllers.error_not_admin")]);
         }
 
         $rules = [
