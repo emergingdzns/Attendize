@@ -445,6 +445,12 @@
                             {!! @trans("Fees.service_fee_fixed_price_help", ["cur"=>$event->currency_symbol]) !!}
                         </div>
                     </div>
+                    @if($organizer->charge_tax)
+                    <div class="form-group">
+                        {!! Form::label('event_charge_tax', trans("Event.tax"), array('class'=>'control-label')) !!}
+                        {!! Form::checkbox('event_charge_tax', 1, $event->charge_tax) !!}
+                    </div>
+                    @endif
                     <div class="panel-footer mt15 text-right">
                         {!! Form::submit(trans("basic.save_changes"), ['class'=>"btn btn-success"]) !!}
                     </div>
