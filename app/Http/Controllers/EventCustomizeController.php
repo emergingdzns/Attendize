@@ -19,10 +19,13 @@ class EventCustomizeController extends MyBaseController
      */
     public function showCustomize($event_id = '', $tab = '')
     {
+        $event = Event::scope()->findOrFail($event_id);
+
         $data = $this->getEventViewData($event_id, [
             'available_bg_images'        => $this->getAvailableBackgroundImages(),
             'available_bg_images_thumbs' => $this->getAvailableBackgroundImagesThumbs(),
             'tab'                        => $tab,
+            'organizer'                  => $event->organiser
         ]);
 
         return view('ManageEvent.Customize', $data);
@@ -171,7 +174,7 @@ class EventCustomizeController extends MyBaseController
 
         $rules = [
             'organiser_fee_percentage' => ['numeric', 'between:0,100'],
-            'organiser_fee_fixed'      => ['numeric', 'between:0,100'],
+            'organiser_fee_fixed'      => ['numeric', 'between:0,100']
         ];
         $messages = [
             'organiser_fee_percentage.numeric' => trans("validation.between.numeric", ["attribute"=>trans("Fees.service_fee_percentage"), "min"=>0, "max"=>100]),
@@ -190,6 +193,11 @@ class EventCustomizeController extends MyBaseController
 
         $event->organiser_fee_percentage = $request->get('organiser_fee_percentage');
         $event->organiser_fee_fixed = $request->get('organiser_fee_fixed');
+        if ($request->has('event_charge_tax')) {
+            $event->charge_tax = true;
+        } else {
+            $event->charge_tax = false;
+        }
         $event->save();
 
         return response()->json([

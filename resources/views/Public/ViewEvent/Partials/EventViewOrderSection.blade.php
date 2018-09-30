@@ -82,7 +82,7 @@
 
                         <div class="col-sm-4 col-xs-6">
                             <b>@lang("Public_ViewEvent.amount")</b><br> {{$order->event->currency_symbol}}{{number_format($order->total_amount, 2)}}
-                            @if($event->organiser->charge_tax)
+                            @if($event->organiser->charge_tax && $event->charge_tax)
                             <small>{{ $orderService->getVatFormattedInBrackets() }}</small>
                             @endif
                         </div>
@@ -189,7 +189,7 @@
                                     {{ $orderService->getOrderTotalWithBookingFee(true) }}
                                 </td>
                             </tr>
-                            @if($event->organiser->charge_tax)
+                            @if($event->organiser->charge_tax && $event->charge_tax)
                             <tr>
                                 <td>
                                 </td>

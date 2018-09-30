@@ -38,7 +38,7 @@
                     <h5>
                         @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
                     </h5>
-                    @if($event->organiser->charge_tax)
+                    @if($event->organiser->charge_tax && $event->charge_tax)
                     <h5>
                         {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                         <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>

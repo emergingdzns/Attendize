@@ -82,7 +82,7 @@ Order Email: <b>{{$order->email}}</b><br>
                 {{$orderService->getOrderTotalWithBookingFee(true)}}
             </td>
         </tr>
-        @if($order->event->organiser->charge_tax == 1)
+        @if($order->event->organiser->charge_tax == 1 && $order->event->charge_tax)
         <tr>
             <td>
             </td>

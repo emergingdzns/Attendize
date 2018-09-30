@@ -47,4 +47,5 @@ return array (
   'venue_name_placeholder' => 'E.g: The Crab Shack',
   'vis_hide' => 'Hide event from the public.',
   'vis_public' => 'Make event visible to the public.',
+    'tax' => 'Charge Tax for Event?'
 );

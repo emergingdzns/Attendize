@@ -143,7 +143,7 @@
                                         {{money($order->total_amount, $order->event->currency)}}
                                     </td>
                                 </tr>
-                                @if($order->event->organiser->charge_tax)
+                                @if($order->event->organiser->charge_tax && $order->event->charge_tax)
                                 <tr>
                                     <td>
                                     </td>
