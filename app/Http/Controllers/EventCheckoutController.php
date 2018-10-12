@@ -484,7 +484,7 @@ class EventCheckoutController extends Controller
         /*
          * No payment required so go ahead and complete the order
          */
-        return $this->completeOrder($event_id);
+        return $this->completeOrder($event_id,false);
 
     }
 

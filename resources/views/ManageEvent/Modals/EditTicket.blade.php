@@ -42,7 +42,8 @@
                         <div class="form-group">
                             <div class="custom-checkbox">
                                 {!! Form::checkbox('is_deposit', null, null, ['id' => 'is_deposit']) !!}
-                                {!! Form::label('is_deposit', trans("ManageEvent.is_deposit"), array('class'=>'control-label')) !!}
+                                {!! Form::label('is_deposit', trans("ManageEvent.is_deposit"), array('class'=>'control-label')) !!}<br>
+                                <small>{{ trans("ManageEvent.deposit_note") }}</small>
                             </div>
                         </div>
                     </div>

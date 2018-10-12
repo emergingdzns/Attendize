@@ -26,13 +26,11 @@
                                     (Deposit)
                                 @endif
                                 X <b>{{$ticket['qty']}}</b></td>
+                            @if((int)ceil($ticket['full_price']) !== 0)
                             <td style="text-align: right;">
-                                @if((int)ceil($ticket['full_price']) === 0)
-                                    @lang("Public_ViewEvent.free")
-                                @else
                                 {{ money($ticket['full_price'], $event->currency) }}
-                                @endif
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </table>
