@@ -90,6 +90,7 @@ class EventCheckoutController extends Controller
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
+        $balance_due = 0;
 
         foreach ($ticket_ids as $ticket_id) {
             $current_ticket_quantity = (int)$request->get('ticket_' . $ticket_id);
@@ -134,12 +135,14 @@ class EventCheckoutController extends Controller
 
             $tickets[] = [
                 'ticket'                => $ticket,
+                'is_deposit'            => $ticket->is_deposit,
                 'qty'                   => $current_ticket_quantity,
                 'price'                 => ($current_ticket_quantity * $ticket->price),
                 'booking_fee'           => ($current_ticket_quantity * $ticket->booking_fee),
                 'organiser_booking_fee' => ($current_ticket_quantity * $ticket->organiser_booking_fee),
-                'full_price'            => $ticket->price + $ticket->total_booking_fee,
+                'full_price'            => $ticket->price + $ticket->total_booking_fee
             ];
+            $balance_due += (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
 
             /*
              * Reserve the tickets for X amount of minutes
@@ -217,7 +220,8 @@ class EventCheckoutController extends Controller
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
-            'payment_gateway'         => $paymentGateway
+            'payment_gateway'         => $paymentGateway,
+            'balance_due'             => $balance_due
         ]);
 
         /*
@@ -570,6 +574,7 @@ class EventCheckoutController extends Controller
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
+            $order->balance_due = $ticket_order['balance_due'];
 
             // Calculating grand total including tax
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);

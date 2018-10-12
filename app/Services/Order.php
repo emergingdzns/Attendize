@@ -38,6 +38,12 @@ class Order
     public $grandTotal;
 
     /**
+     * @var float
+     */
+    public $balanceDue;
+
+
+    /**
      * Order constructor.
      * @param $orderTotal
      * @param $totalBookingFee
@@ -104,6 +110,20 @@ class Order
         }
 
         return money($this->grandTotal, $this->event->currency);
+
+    }
+
+    /**
+     * @param bool $currencyFormatted
+     * @return float|string
+     */
+    public function getBalanceDue($currencyFormatted = false) {
+
+        if ($currencyFormatted == false ) {
+            return number_format($this->balanceDue, 2, '.', '');
+        }
+
+        return money($this->balanceDue, $this->event->currency);
 
     }
 

@@ -213,12 +213,28 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <b>Total</b>
+                                    <b>Total<?php if ($order->balance_due > 0):?>Deposit Paid<?php endif; ?></b>
                                 </td>
                                 <td colspan="2">
                                    {{ $orderService->getGrandTotal(true) }}
                                 </td>
                             </tr>
+                            @if($order->balance_due > 0)
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <b>Due at Event</b>
+                                    </td>
+                                    <td colspan="2">
+                                        {{money($order->balance_due, $order->event->currency)}}
+                                    </td>
+                                </tr>
+                            @endif
                             @if($order->is_refunded || $order->is_partially_refunded)
                                 <tr>
                                     <td>

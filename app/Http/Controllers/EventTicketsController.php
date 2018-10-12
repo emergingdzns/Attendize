@@ -110,6 +110,8 @@ class EventTicketsController extends MyBaseController
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->description = $request->get('description');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $ticket->full_price = $request->get('full_price');
+        $ticket->is_deposit = $request->get('is_deposit') ? 1 : 0;
 
         $ticket->save();
 
@@ -242,6 +244,8 @@ class EventTicketsController extends MyBaseController
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
+        $ticket->full_price = $request->get('full_price');
+        $ticket->is_deposit = $request->get('is_deposit') ? 1 : 0;
 
         $ticket->save();
 

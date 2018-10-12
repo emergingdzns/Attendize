@@ -447,8 +447,10 @@
                     </div>
                     @if($organizer->charge_tax)
                     <div class="form-group">
-                        {!! Form::label('event_charge_tax', trans("Event.tax"), array('class'=>'control-label')) !!}
-                        {!! Form::checkbox('event_charge_tax', 1, $event->charge_tax) !!}
+                        <div class="custom-checkbox">
+                            {!! Form::checkbox('event_charge_tax', 1, $event->charge_tax) !!}
+                            {!! Form::label('event_charge_tax', trans("Event.tax"), array('class'=>'control-label')) !!}
+                        </div>
                     </div>
                     @endif
                     <div class="panel-footer mt15 text-right">

@@ -95,6 +95,9 @@ return array (
   'ticket_title_placeholder' => 'E.g: General Admission',
   'update_order' => 'Update Order',
   'widgets' => 'Widgets',
+  'is_deposit' => 'Deposit Only (enter deposit price above) and full price to the right',
+  'full_ticket_price' => 'If deposit only, enter full price below',
+  'full_ticket_price_placeholder' => 'Full Ticket Price',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (

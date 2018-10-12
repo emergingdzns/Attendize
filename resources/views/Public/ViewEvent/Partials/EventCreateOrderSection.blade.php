@@ -21,7 +21,11 @@
                     <table class="table mb0 table-condensed">
                         @foreach($tickets as $ticket)
                         <tr>
-                            <td class="pl0">{{{$ticket['ticket']['title']}}} X <b>{{$ticket['qty']}}</b></td>
+                            <td class="pl0">{{{$ticket['ticket']['title']}}}
+                                @if($ticket['is_deposit'])
+                                    (Deposit)
+                                @endif
+                                X <b>{{$ticket['qty']}}</b></td>
                             <td style="text-align: right;">
                                 @if((int)ceil($ticket['full_price']) === 0)
                                     @lang("Public_ViewEvent.free")
@@ -47,6 +51,13 @@
                         <strong>Grand Total:</strong>
                         <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
                     </h5>
+                    @endif
+                    @if($balance_due>0)
+                        <hr>
+                        <h5>
+                            <strong>Due at Event:</strong>
+                            <span style="float: right;"><b>{{ money($balance_due, $event->currency) }}</b></span>
+                        </h5>
                     @endif
                 </div>
                 @endif
