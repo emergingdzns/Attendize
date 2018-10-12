@@ -48,6 +48,27 @@
 
                         </div>
 
+                        <div class="row more-options">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="custom-checkbox">
+                                        {!! Form::checkbox('is_deposit', null, null, ['id' => 'is_deposit']) !!}
+                                        {!! Form::label('is_deposit', trans("ManageEvent.is_deposit"), array('class'=>'control-label')) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('full_price', trans("ManageEvent.full_ticket_price"), array('class'=>'control-label')) !!}
+                                    {!! Form::text('full_price', null,
+                                                array(
+                                                'class'=>'form-control',
+                                                'placeholder'=>trans("ManageEvent.full_ticket_price_placeholder")
+                                                ))  !!}
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group more-options">
                             {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
                             {!!  Form::text('description', Input::old('description'),
