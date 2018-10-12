@@ -21,6 +21,7 @@
                             <table class="table">
                                 <?php
                                 $is_free_event = true;
+                                $has_deposit = false;
                                 ?>
                                 @foreach($tickets as $ticket)
                                     <tr class="ticket" property="offers" typeof="Offer">
@@ -32,9 +33,14 @@
                                                 {{$ticket->description}}
                                             </p>
                                         </td>
-                                        @if ($ticket->is_deposit && $ticket->full_price > 0)
+                                        @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
+                                            <?php
+                                            $has_deposit = true;
+                                            ?>
                                         <td style="width:200px; text-align: center;">
+                                            @if($ticket->is_deposit && $ticket->full_price > 0)
                                             Full Price {{money($ticket->full_price, $event->currency)}}
+                                            @endif
                                         </td>
                                         @endif
                                         <td style="width:200px; text-align: right;">
@@ -102,12 +108,12 @@
                                 @endforeach
 
                                     <tr>
-                                        <td colspan="@if($ticket->is_deposit && $ticket->full_price > 0) 4 @else 3 @endif" style="text-align: center">
+                                        <td colspan="@if($has_deposit) 4 @else 3 @endif" style="text-align: center">
                                             @lang("Public_ViewEvent.below_tickets")
                                         </td>
                                     </tr>
                                 <tr class="checkout">
-                                    <td colspan="@if($ticket->is_deposit && $ticket->full_price > 0) 4 @else 3 @endif">
+                                    <td colspan="@if($has_deposit) 4 @else 3 @endif">
                                         @if(!$is_free_event)
                                             <div class="hidden-xs pull-left">
                                                 <img class=""
