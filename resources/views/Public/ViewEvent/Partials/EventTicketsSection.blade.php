@@ -25,13 +25,18 @@
                                 @foreach($tickets as $ticket)
                                     <tr class="ticket" property="offers" typeof="Offer">
                                         <td>
-                                <span class="ticket-title semibold" property="name">
-                                    {{$ticket->title}}
-                                </span>
+                                            <span class="ticket-title semibold" property="name">
+                                                {{$ticket->title}}
+                                            </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
                                             </p>
                                         </td>
+                                        @if ($ticket->is_deposit && $ticket->full_price > 0)
+                                        <td style="width:200px; text-align: center;">
+                                            Full Price {{money($ticket->full_price, $event->currency)}}
+                                        </td>
+                                        @endif
                                         <td style="width:200px; text-align: right;">
                                             <div class="ticket-pricing" style="margin-right: 20px;">
                                                 @if($ticket->is_free)
@@ -41,6 +46,9 @@
                                                     <?php
                                                     $is_free_event = false;
                                                     ?>
+                                                    @if ($ticket->is_deposit)
+                                                        (Deposit Only)
+                                                    @endif
                                                     <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
                                                     @if ($event->charge_tax)
                                                         <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span>
@@ -94,12 +102,12 @@
                                 @endforeach
 
                                     <tr>
-                                        <td colspan="3" style="text-align: center">
+                                        <td colspan="@if($ticket->is_deposit && $ticket->full_price > 0) 4 @else 3 @endif" style="text-align: center">
                                             @lang("Public_ViewEvent.below_tickets")
                                         </td>
                                     </tr>
                                 <tr class="checkout">
-                                    <td colspan="3">
+                                    <td colspan="@if($ticket->is_deposit && $ticket->full_price > 0) 4 @else 3 @endif">
                                         @if(!$is_free_event)
                                             <div class="hidden-xs pull-left">
                                                 <img class=""
