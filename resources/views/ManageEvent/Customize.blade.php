@@ -55,6 +55,28 @@
                 buttonup_class: "btn btn-link",
                 postfix_extraclass: "btn btn-link"
             });
+            $("input[name='gratuity_percentage']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                verticalbuttons: true,
+                postfix: '%',
+                buttondown_class: "btn btn-link",
+                buttonup_class: "btn btn-link",
+                postfix_extraclass: "btn btn-link"
+            });
+            $("input[name='gratuity_fixed']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                verticalbuttons: true,
+                postfix: '{{$event->currency->symbol_left}}',
+                buttondown_class: "btn btn-link",
+                buttonup_class: "btn btn-link",
+                postfix_extraclass: "btn btn-link"
+            });
 
             /* Affiliate generator */
             $('#affiliateGenerator').on('keyup', function () {
@@ -421,10 +443,6 @@
                     {!! Form::model($event, array('url' => route('postEditEventFees', ['event_id' => $event->id]), 'class' => 'ajax')) !!}
                     <h4>@lang("Fees.organiser_fees")</h4>
 
-                    <div class="well">
-                        {!! @trans("Fees.organiser_fees_text") !!}
-                    </div>
-
                     <div class="form-group">
                         {!! Form::label('organiser_fee_percentage', trans("Fees.service_fee_percentage"), array('class'=>'control-label required')) !!}
                         {!!  Form::text('organiser_fee_percentage', $event->organiser_fee_percentage, [
@@ -445,10 +463,30 @@
                             {!! @trans("Fees.service_fee_fixed_price_help", ["cur"=>$event->currency_symbol]) !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        {!! Form::label('gratuity_percentage', trans("Fees.gratuity_percentage"), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('gratuity_percentage', $event->gratuity_percentage, [
+                            'class' => 'form-control',
+                            'placeholder' => trans("Fees.gratuity_percentage_placeholder")
+                        ])  !!}
+                        <div class="help-block">
+                            {!! @trans("Fees.gratuity_percentage_help") !!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('gratuity_fixed', trans("Fees.gratuity_fixed_price"), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('gratuity_fixed', null, [
+                            'class' => 'form-control',
+                            'placeholder' => trans("Fees.gratuity_fixed_price_placeholder")
+                        ])  !!}
+                        <div class="help-block">
+                            {!! @trans("Fees.gratuity_fixed_price_help", ["cur"=>$event->currency_symbol]) !!}
+                        </div>
+                    </div>
                     @if($organizer->charge_tax)
                     <div class="form-group">
-                        <div class="custom-checkbox">
-                            {!! Form::checkbox('event_charge_tax', 1, $event->charge_tax) !!}
+                        <div class="checkbox custom-checkbox">
+                            {!! Form::checkbox('event_charge_tax', 1, $event->charge_tax, ['id' => 'event_charge_tax', 'data-toggle' => 'toggle']) !!}
                             {!! Form::label('event_charge_tax', trans("Event.tax"), array('class'=>'control-label')) !!}
                         </div>
                     </div>

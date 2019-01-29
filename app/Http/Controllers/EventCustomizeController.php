@@ -174,12 +174,17 @@ class EventCustomizeController extends MyBaseController
 
         $rules = [
             'organiser_fee_percentage' => ['numeric', 'between:0,100'],
-            'organiser_fee_fixed'      => ['numeric', 'between:0,100']
+            'organiser_fee_fixed'      => ['numeric', 'between:0,100'],
+            'gratuity_percentage' => ['numeric', 'between:0,100'],
+            'gratuity_fixed'      => ['numeric', 'between:0,100']
         ];
         $messages = [
             'organiser_fee_percentage.numeric' => trans("validation.between.numeric", ["attribute"=>trans("Fees.service_fee_percentage"), "min"=>0, "max"=>100]),
             'organiser_fee_fixed.numeric'      => trans("validation.date_format", ["attribute"=>trans("Fees.service_fee_fixed_price"), "format"=>"0.00"]),
             'organiser_fee_fixed.between'      => trans("validation.between.numeric", ["attribute"=>trans("Fees.service_fee_fixed_price"), "min"=>0, "max"=>100]),
+            'gratuity_percentage.numeric' => trans("validation.between.numeric", ["attribute"=>trans("Fees.gratuity_percentage"), "min"=>0, "max"=>100]),
+            'gratuity_fixed.numeric'      => trans("validation.date_format", ["attribute"=>trans("Fees.gratuity_fixed_price"), "format"=>"0.00"]),
+            'gratuity_fixed.between'      => trans("validation.between.numeric", ["attribute"=>trans("Fees.gratuity_fixed_price"), "min"=>0, "max"=>100]),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -193,6 +198,8 @@ class EventCustomizeController extends MyBaseController
 
         $event->organiser_fee_percentage = $request->get('organiser_fee_percentage');
         $event->organiser_fee_fixed = $request->get('organiser_fee_fixed');
+        $event->gratuity_percentage = $request->get('gratuity_percentage');
+        $event->gratuity_fixed = $request->get('gratuity_fixed');
         if ($request->has('event_charge_tax')) {
             $event->charge_tax = true;
         } else {

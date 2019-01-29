@@ -8,7 +8,7 @@ return array (
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\Shared\\Layouts\\Master.blade.php
   'account_settings' => 'Account Settings',
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\Shared\\Layouts\\Master.blade.php
-  'create_organiser' => 'Create Location/Venue',
+  'create_organiser' => 'Create Restaurant',
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\Shared\\Layouts\\Master.blade.php
   'feedback_bug_report' => 'Feedback / Bug Report',
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\Shared\\Layouts\\Master.blade.php

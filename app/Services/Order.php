@@ -18,6 +18,11 @@ class Order
     private $totalBookingFee;
 
     /**
+     * @var float
+     */
+    private $totalGratuity;
+
+    /**
      * @var Event
      */
     private $event;
@@ -49,10 +54,11 @@ class Order
      * @param $totalBookingFee
      * @param $event
      */
-    public function __construct($orderTotal, $totalBookingFee, $event) {
+    public function __construct($orderTotal, $totalBookingFee, $totalGratuity, $event) {
 
         $this->orderTotal = $orderTotal;
         $this->totalBookingFee = $totalBookingFee;
+        $this->totalGratuity = $totalGratuity;
         $this->event = $event;
     }
 
@@ -62,10 +68,10 @@ class Order
      */
     public function calculateFinalCosts()
     {
-        $this->orderTotalWithBookingFee = $this->orderTotal + $this->totalBookingFee;
+        $this->orderTotalWithBookingFee = $this->orderTotal + $this->totalBookingFee + $this->totalGratuity;
 
         if ($this->event->organiser->charge_tax == 1 && $this->event->charge_tax == 1) {
-            $this->taxAmount = ($this->orderTotalWithBookingFee * $this->event->organiser->tax_value)/100;
+            $this->taxAmount = (($this->orderTotalWithBookingFee - $this->totalGratuity) * $this->event->organiser->tax_value)/100;
         } else {
             $this->taxAmount = 0;
         }

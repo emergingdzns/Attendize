@@ -89,6 +89,7 @@ class EventCheckoutController extends Controller
         $total_ticket_quantity = 0;
         $booking_fee = 0;
         $organiser_booking_fee = 0;
+        $gratuity = 0;
         $quantity_available_validation_rules = [];
         $balance_due = 0;
 
@@ -131,6 +132,7 @@ class EventCheckoutController extends Controller
 
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
+            $gratuity = $gratuity + ($current_ticket_quantity * $ticket->gratuity);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
             $tickets[] = [
@@ -139,8 +141,9 @@ class EventCheckoutController extends Controller
                 'qty'                   => $current_ticket_quantity,
                 'price'                 => ($current_ticket_quantity * $ticket->price),
                 'booking_fee'           => ($current_ticket_quantity * $ticket->booking_fee),
+                'gratuity'              => ($current_ticket_quantity * $ticket->gratuity),
                 'organiser_booking_fee' => ($current_ticket_quantity * $ticket->organiser_booking_fee),
-                'full_price'            => $ticket->price + $ticket->total_booking_fee
+                'full_price'            => $ticket->price + $ticket->total_booking_fee + $ticket->gratuity
             ];
             $balance_due += (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
 
@@ -214,6 +217,7 @@ class EventCheckoutController extends Controller
             'reserved_tickets_id'     => $reservedTickets->id,
             'order_total'             => $order_total,
             'booking_fee'             => $booking_fee,
+            'gratuity'                => $gratuity,
             'organiser_booking_fee'   => $organiser_booking_fee,
             'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
             'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
@@ -264,7 +268,7 @@ class EventCheckoutController extends Controller
 
         $event = Event::findorFail($order_session['event_id']);
 
-        $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $event);
+        $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event);
         $orderService->calculateFinalCosts();
 
         $data = $order_session + [
@@ -357,7 +361,7 @@ class EventCheckoutController extends Controller
                         ]);
                 }
 
-                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event);
                 $orderService->calculateFinalCosts();
               
                 $transaction_data += [
@@ -571,13 +575,14 @@ class EventCheckoutController extends Controller
             $order->booking_fee = $ticket_order['booking_fee'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
+            $order->gratuity = $ticket_order['gratuity'];
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
             $order->balance_due = $ticket_order['balance_due'];
 
             // Calculating grand total including tax
-            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event);
             $orderService->calculateFinalCosts();
 
             $order->taxamt = $orderService->getTaxAmount();
@@ -641,6 +646,7 @@ class EventCheckoutController extends Controller
                 $orderItem->order_id = $order->id;
                 $orderItem->unit_price = $attendee_details['ticket']['price'];
                 $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
+                $orderItem->unit_gratuity = $attendee_details['ticket']['gratuity'];
                 $orderItem->save();
 
                 /*
@@ -750,7 +756,7 @@ class EventCheckoutController extends Controller
             abort(404);
         }
 
-        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
+        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->gratuity, $order->event);
         $orderService->calculateFinalCosts();
 
         $data = [

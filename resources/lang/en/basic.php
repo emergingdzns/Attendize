@@ -37,7 +37,7 @@ return array (
   'promote' => 'Promote',
   'save_changes' => 'Save Changes',
   'save_details' => 'Save Details',
-  'service_fees' => 'Service Fees',
+  'service_fees' => 'Fees',
   'social' => 'Social',
   'submit' => 'Submit',
   'success' => 'Success',

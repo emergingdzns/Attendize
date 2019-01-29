@@ -49,5 +49,5 @@ return array (
   'ticket_sub_text_color' => 'Ticket Sub Text Color',
   'ticket_text_color' => 'Ticket Text Color',
   'ticket_type' => 'Ticket Type',
-  'venue' => 'Venue',
+  'venue' => 'Restaurant',
 );

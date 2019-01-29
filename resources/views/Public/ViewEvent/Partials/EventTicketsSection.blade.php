@@ -31,6 +31,20 @@
                                             </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
+                                                @if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0)
+                                                    <br>
+                                                    <span class="tax-amount text-muted text-smaller">Ticket Price Includes:
+                                                    @if ($ticket->total_booking_fee > 0)
+                                                        {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")
+                                                    @endif
+                                                    @if ($ticket->total_booking_fee > 0 and $ticket->gratuity > 0)
+                                                        +
+                                                    @endif
+                                                    @if ($ticket->gratuity > 0)
+                                                        {{money($ticket->gratuity, $event->currency)}} @lang("Public_ViewEvent.gratuity")
+                                                    @endif
+                                                    </span>
+                                                @endif
                                             </p>
                                         </td>
                                         @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
@@ -43,7 +57,7 @@
                                             @endif
                                         </td>
                                         @endif
-                                        <td style="width:200px; text-align: right;">
+                                        <td style="min-width:200px; text-align: right;">
                                             <div class="ticket-pricing" style="margin-right: 20px;">
                                                 @if($ticket->is_free)
                                                     @lang("Public_ViewEvent.free")
@@ -55,8 +69,9 @@
                                                     @if ($ticket->is_deposit)
                                                         (Deposit Only)
                                                     @endif
-                                                    <span title='{{money($ticket->price, $event->currency)}} @lang("Public_ViewEvent.ticket_price") + {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")'>{{money($ticket->total_price, $event->currency)}} </span>
+                                                    <span>{{money($ticket->total_price, $event->currency)}} </span>
                                                     @if ($event->charge_tax)
+                                                        <br>
                                                         <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span>
                                                     @endif
                                                     <meta property="priceCurrency"
