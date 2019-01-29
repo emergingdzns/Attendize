@@ -28,7 +28,7 @@
                                 X <b>{{$ticket['qty']}}</b></td>
                             @if((int)ceil($ticket['full_price']) !== 0)
                             <td style="text-align: right;">
-                                {{ money($ticket['full_price'], $event->currency) }}
+                                {{ money($ticket['ticket']->price, $event->currency) }}
                             </td>
                             @endif
                         </tr>
@@ -38,13 +38,28 @@
                 @if($order_total > 0)
                 <div class="panel-footer">
                     <h5>
-                        @lang("Public_ViewEvent.total"): <span style="float: right;"><b>{{ $orderService->getOrderTotalWithBookingFee(true) }}</b></span>
+                        Tickets: <span style="float: right;"><b>{{ money($ticket['price'], $event->currency) }}</b></span>
+                    </h5>
+                    @if($ticket['ticket']->total_booking_fee > 0)
+                        <h5>
+                            Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                        </h5>
+                    @endif
+                    <h5>
+                        Subtotal: <span style="float: right;"><b>{{ money(($ticket['price']+($ticket['ticket']->total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
                     </h5>
                     @if($event->organiser->charge_tax && $event->charge_tax)
                     <h5>
                         {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                         <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
                     </h5>
+                    @if($ticket['gratuity'] > 0)
+                        <h5>
+                            Gratuity:
+                            <span style="float: right;"><b>{{ money($ticket['gratuity'], $event->currency) }}</b></span>
+                        </h5>
+                    @endif
+                    <hr>
                     <h5>
                         <strong>Grand Total:</strong>
                         <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>

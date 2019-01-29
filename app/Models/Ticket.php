@@ -125,7 +125,7 @@ class Ticket extends MyBaseModel
      */
     public function getTotalPriceAttribute()
     {
-        return $this->getTotalBookingFeeAttribute() + $this->price;
+        return $this->getTotalBookingFeeAttribute() + $this->getGratuityAttribute() + $this->price;
     }
 
     /**
@@ -136,6 +136,17 @@ class Ticket extends MyBaseModel
     public function getTotalBookingFeeAttribute()
     {
         return $this->getBookingFeeAttribute() + $this->getOrganiserBookingFeeAttribute();
+    }
+
+    /**
+     * Get the total booking fee of the ticket.
+     *
+     * @return float|int
+     */
+    public function getGratuityAttribute()
+    {
+        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),
+            2);
     }
 
     /**

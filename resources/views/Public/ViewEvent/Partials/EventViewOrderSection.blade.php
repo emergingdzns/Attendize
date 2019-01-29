@@ -146,6 +146,9 @@
                                     @lang("Public_ViewEvent.booking_fee")
                                 </th>
                                 <th>
+                                    @lang("Public_ViewEvent.gratuity")
+                                </th>
+                                <th>
                                     @lang("Public_ViewEvent.total")
                                 </th>
                                 @endif
@@ -168,7 +171,10 @@
                                         {{money($order_item->unit_booking_fee, $order->event->currency)}}
                                     </td>
                                     <td>
-                                        {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
+                                        {{money($order_item->unit_gratuity, $order->event->currency)}}
+                                    </td>
+                                    <td>
+                                        {{money(($order_item->unit_price + $order_item->unit_booking_fee + $order_item->unit_gratuity) * ($order_item->quantity), $order->event->currency)}}
                                     </td>
                                     @endif
                                 </tr>
@@ -183,6 +189,8 @@
                                     <td>
                                     </td>
                                     <td>
+                                    </td>
+                                    <td>
                                         <b>@lang("Public_ViewEvent.sub_total")</b>
                                     </td>
                                     <td colspan="2">
@@ -191,6 +199,8 @@
                                 </tr>
                                 @if($event->organiser->charge_tax && $event->charge_tax)
                                     <tr>
+                                        <td>
+                                        </td>
                                         <td>
                                         </td>
                                         <td>
@@ -213,6 +223,8 @@
                                         <td>
                                         </td>
                                         <td>
+                                        </td>
+                                        <td>
                                             <b>Total<?php if ($order->balance_due > 0):?>Deposit Paid<?php endif; ?></b>
                                         </td>
                                         <td colspan="2">
@@ -221,6 +233,8 @@
                                     </tr>
                                 @if($order->balance_due > 0)
                                     <tr>
+                                        <td>
+                                        </td>
                                         <td>
                                         </td>
                                         <td>
@@ -244,6 +258,8 @@
                                         <td>
                                         </td>
                                         <td>
+                                        </td>
+                                        <td>
                                             <b>@lang("Public_ViewEvent.refunded_amount")</b>
                                         </td>
                                         <td colspan="2">
@@ -251,6 +267,8 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>
+                                        </td>
                                         <td>
                                         </td>
                                         <td>

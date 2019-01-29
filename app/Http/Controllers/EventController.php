@@ -140,6 +140,8 @@ class EventController extends MyBaseController
         if ($defaults) {
             $event->organiser_fee_fixed = $defaults->organiser_fee_fixed;
             $event->organiser_fee_percentage = $defaults->organiser_fee_percentage;
+            $event->gratuity_fixed = $defaults->gratuity_fixed;
+            $event->gratuity_percentage = $defaults->gratuity_percentage;
             $event->pre_order_display_message = $defaults->pre_order_display_message;
             $event->post_order_display_message = $defaults->post_order_display_message;
             $event->offline_payment_instructions = $defaults->offline_payment_instructions;
