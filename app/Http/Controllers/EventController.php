@@ -50,9 +50,9 @@ class EventController extends MyBaseController
 
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
-        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
-            $request->get('start_date')) : null;
-
+        Log::debug($request->get('start_date'));
+        $event->start_date = $request->get('start_date') ? Carbon::createFromFormat('m-d-Y g:i A', $request->get('start_date')) : null;
+        // The type of time matters
         /*
          * Venue location info (Usually auto-filled from google maps)
          */
@@ -83,7 +83,7 @@ class EventController extends MyBaseController
             $event->location_is_manual = 1;
         }
 
-        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat(config('attendize.default_datetime_format'),
+        $event->end_date = $request->get('end_date') ? Carbon::createFromFormat('m-d-Y g:i A',
             $request->get('end_date')) : null;
 
         $event->currency_id = Auth::user()->account->currency_id;

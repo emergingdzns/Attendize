@@ -71,7 +71,7 @@ class Order
         $this->orderTotalWithBookingFee = $this->orderTotal + $this->totalBookingFee + $this->totalGratuity;
 
         if ($this->event->organiser->charge_tax == 1 && $this->event->charge_tax == 1) {
-            $this->taxAmount = (($this->orderTotalWithBookingFee - $this->totalGratuity) * $this->event->organiser->tax_value)/100;
+            $this->taxAmount = ($this->orderTotalWithBookingFee * $this->event->organiser->tax_value)/100;
         } else {
             $this->taxAmount = 0;
         }

@@ -21,6 +21,7 @@ return array (
     'gratuity' => 'Gratuity',
   'booking_fee' => 'Surcharge',
   'booking_fees' => 'Surcharge',
+  'booking_fees_explanation_percent' => 'A :percent surcharge will be added to all Guest checks to help cover increasing costs and in our support of the recent increases to minimum wage and benefits for our dedicated Team Members.',
   'card_number' => 'Card number',
   'checkout_submit' => 'Checkout',
   'copy_buyer' => 'Apply my information to all tickets below',

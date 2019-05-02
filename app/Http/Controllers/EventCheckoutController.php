@@ -199,8 +199,9 @@ class EventCheckoutController extends Controller
             $activeAccountPaymentGateway->fill(['payment_gateway_id' => config('attendize.payment_gateway_dummy')]);
             $paymentGateway= $activeAccountPaymentGateway;
         } else {
-            $activeAccountPaymentGateway = count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false;
-            $paymentGateway = count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false;
+            Log::debug($event->account->active_payment_gateway->toArray()); // This needs to be converted to an array
+            $activeAccountPaymentGateway = count($event->account->active_payment_gateway->toArray()) ? $event->account->active_payment_gateway : false;
+            $paymentGateway = count($event->account->active_payment_gateway->toArray()) ? $event->account->active_payment_gateway->payment_gateway : false;
        }
 
         /*
@@ -270,6 +271,7 @@ class EventCheckoutController extends Controller
 
         $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event);
         $orderService->calculateFinalCosts();
+        Log::debug($event->organizer_fee_percentage . " percent surcharge");
 
         $data = $order_session + [
                 'event'           => $event,
