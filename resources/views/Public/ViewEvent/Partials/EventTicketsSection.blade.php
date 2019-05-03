@@ -31,7 +31,7 @@
                                 @foreach($tickets as $ticket)
                                     <?php
                                         $thisTicketHasDeposit = false;
-                                        if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit){
+                                        if (($ticket->is_deposit && $ticket->full_price > 0)){
                                             $thisTicketHasDeposit = true;
                                         }
                                     ?>
