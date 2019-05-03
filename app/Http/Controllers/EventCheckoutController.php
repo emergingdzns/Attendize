@@ -169,7 +169,14 @@ class EventCheckoutController extends Controller
             }
 
             $tickets[] = $ticketData;
-            $balance_due += (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
+
+            $ticketBalance = (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
+
+            if ($ticket->is_deposit && $ticket->full_price > 0) {
+                $ticketBalance += $final_booking_fee + $final_organiser_booking_fee;
+            }
+
+            $balance_due += $ticketBalance;
 
             /*
              * Reserve the tickets for X amount of minutes
