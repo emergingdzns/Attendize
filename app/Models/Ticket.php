@@ -153,12 +153,12 @@ class Ticket extends MyBaseModel
      */
     public function getGratuityAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : ($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed);
+        return ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),2);
     }
 
     public function getFullGratuityAttribute()
     {
-        return (int)ceil($this->full_price) === 0 ? 0 : ($this->full_price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed);
+        return ceil($this->full_price) === 0 ? 0 : round(($this->full_price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),2);
     }
 
     /**
@@ -168,12 +168,12 @@ class Ticket extends MyBaseModel
      */
     public function getBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
+        return ceil($this->price) === 0 ? 0 : round(($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
             2);
     }
     public function getFullBookingFeeAttribute()
     {
-        return (int)ceil($this->full_price) === 0 ? 0 : round(($this->full_price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
+        return ceil($this->full_price) === 0 ? 0 : round(($this->full_price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
             2);
     }
 
@@ -184,12 +184,12 @@ class Ticket extends MyBaseModel
      */
     public function getOrganiserBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
+        return ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
             2);
     }
     public function getFullOrganiserBookingFeeAttribute()
     {
-        return (int)ceil($this->full_price) === 0 ? 0 : round(($this->full_price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
+        return ceil($this->full_price) === 0 ? 0 : round(($this->full_price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
             2);
     }
 
