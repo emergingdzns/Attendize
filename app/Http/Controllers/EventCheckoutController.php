@@ -261,6 +261,30 @@ class EventCheckoutController extends Controller
             'balance_due'             => $balance_due
         ]);
 
+        print_r([
+            'validation_rules'        => $validation_rules,
+            'validation_messages'     => $validation_messages,
+            'event_id'                => $event->id,
+            'tickets'                 => $tickets,
+            'total_ticket_quantity'   => $total_ticket_quantity,
+            'order_started'           => time(),
+            'expires'                 => $order_expires_time,
+            'reserved_tickets_id'     => $reservedTickets->id,
+            'order_total'             => $order_total,
+            'booking_fee'             => $booking_fee,
+            'gratuity'                => $gratuity,
+            'organiser_booking_fee'   => $organiser_booking_fee,
+            'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
+            'final_booking_fee'       => $final_booking_fee + $final_organiser_booking_fee,
+            'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
+            'account_id'              => $event->account->id,
+            'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
+            'account_payment_gateway' => $activeAccountPaymentGateway,
+            'payment_gateway'         => $paymentGateway,
+            'balance_due'             => $balance_due
+        ]);
+        exit;
+
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
