@@ -44,13 +44,13 @@
                             <h5>
                                 Tickets: <span style="float: right;"><b>{{ money($ticket['finals']['total'], $event->currency) }}</b></span>
                             </h5>
-                            @if($ticket['ticket']->final_total_booking_fee > 0)
+                            @if($ticket['ticket']->final_booking_fee > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->final_total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->final_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
-                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['finals']['total']+($ticket['ticket']->final_total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
+                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['finals']['total']+($ticket['ticket']->final_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
                             </h5>
                             @if($event->organiser->charge_tax && $event->charge_tax)
                                 <h5>
