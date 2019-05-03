@@ -18,6 +18,7 @@
                 <div class="col-md-12">
                     <div class="content">
                         <div class="tickets_table_wrap">
+                            <?php print_r($ticket); ?>
                             <table class="table">
                                 <?php
                                 $is_free_event = true;
