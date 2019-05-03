@@ -63,8 +63,8 @@
                             @endif
                             <hr>
                             <h5>
-                                <strong>Due Now:</strong>
-                                <span style="float: right;"><b>{{  money($order_total, $event->currency) }}</b></span>
+                                <strong><span style="font-size:120%;font-weight:600;">Due Now:</span></strong>
+                                <span style="float: right;"><span style="font-size:120%;font-weight:600;">{{  money($order_total, $event->currency) }}</span></span>
                             </h5>
                             @if($balance_due>0)
                                 <hr>
