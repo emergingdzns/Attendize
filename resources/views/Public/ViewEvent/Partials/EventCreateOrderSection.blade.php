@@ -64,12 +64,12 @@
                                     {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                                     <span style="float: right;"><b>{{ $orderService->getTaxFullAmount(true) }}</b></span>
                                 </h5>
-                                <hr>
-                                <h5>
-                                    <strong>Due Now:</strong>
-                                    <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
-                                </h5>
                             @endif
+                            <hr>
+                            <h5>
+                                <strong>Due Now:</strong>
+                                <span style="float: right;"><b>{{  money($ticket['full']['total'], $event->currency) }}</b></span>
+                            </h5>
                             @if($balance_due>0)
                                 <hr>
                                 <h5>
