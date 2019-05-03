@@ -60,10 +60,10 @@
                                             <?php
                                                 $pluses = [];
                                                 if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0) {
-                                                    $pluses[] = lang("Public_ViewEvent.booking_fees");
+                                                    $pluses[] = 'Surcharge';
                                                 }
                                                 if ($event->gratuity_fixed > 0 || $event->gratuity_percentage > 0) {
-                                                    $pluses[] = lang("Public_ViewEvent.gratuity");
+                                                    $pluses[] = 'Gratuity';
                                                 }
                                                 if ($event->charge_tax && ($ticket->total_price*($event->organiser->tax_value)/100) > 0) {
                                                     $pluses[] = $event->organiser->tax_name;
