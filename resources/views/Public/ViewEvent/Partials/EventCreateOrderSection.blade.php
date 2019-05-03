@@ -59,7 +59,7 @@
                                 <h5>
                                     {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                                     <?php /*$orderService->getTaxFullAmount(true)*/ ?>
-                                    <span style="float: right;"><b>{{ money((($full['total']+$full['organiser_booking_fee']+$full['gratuity'])*($event->organiser->tax_value/100)), $event->currency) }}</b></span>
+                                    <span style="float: right;"><b>{{ money((($full['total']+$full['gratuity'])*($event->organiser->tax_value/100)), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <hr>
