@@ -47,7 +47,7 @@
                                 </h5>
                             @endif
                             <h5>
-                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['finals']['total']+($ticket['ticket']->full_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
+                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['full']['total']+($ticket['ticket']->full_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
                             </h5>
                             @if($event->organiser->charge_tax && $event->charge_tax)
                                 <!-- TODO: Suggested change: put gratuity before tax? -->
