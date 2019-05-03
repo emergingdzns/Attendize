@@ -41,22 +41,21 @@
                             <h5>
                                 Tickets (Full Price): <span style="float: right;"><b>{{ money($ticket['full']['total'], $event->currency) }}</b></span>
                             </h5>
-                            @if($ticket['ticket']->full_booking_fee > 0)
+                            @if(($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee']) > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->full_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee']), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
-                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['full']['total']+($ticket['ticket']->full_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
+                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['full']['total']+($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee'])), $event->currency) }}</b></span>
                             </h5>
+                            @if($ticket['full']['gratuity'] > 0)
+                                <h5>
+                                    Gratuity:
+                                    <span style="float: right;"><b>{{ money($ticket['full']['gratuity'], $event->currency) }}</b></span>
+                                </h5>
+                            @endif
                             @if($event->organiser->charge_tax && $event->charge_tax)
-                                <!-- TODO: Suggested change: put gratuity before tax? -->
-                                @if($ticket['full']['gratuity'] > 0)
-                                    <h5>
-                                        Gratuity:
-                                        <span style="float: right;"><b>{{ money($ticket['full']['gratuity'], $event->currency) }}</b></span>
-                                    </h5>
-                                @endif
                                 <h5>
                                     {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                                     <span style="float: right;"><b>{{ $orderService->getTaxFullAmount(true) }}</b></span>
