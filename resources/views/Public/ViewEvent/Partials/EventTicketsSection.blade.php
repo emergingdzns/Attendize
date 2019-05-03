@@ -24,6 +24,11 @@
                                 $has_deposit = false;
                                 ?>
                                 @foreach($tickets as $ticket)
+                                    @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
+                                        <?php
+                                        $has_deposit = true;
+                                        ?>
+                                    @endif
                                     <tr class="ticket" property="offers" typeof="Offer">
                                         <td>
                                             <span class="ticket-title semibold" property="name">
@@ -48,9 +53,6 @@
                                             </p>
                                         </td>
                                         @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
-                                            <?php
-                                            $has_deposit = true;
-                                            ?>
                                         <td style="width:200px; text-align: center;">
                                             @if($ticket->is_deposit && $ticket->full_price > 0)
                                             Full Price {{money($ticket->full_price, $event->currency)}}
