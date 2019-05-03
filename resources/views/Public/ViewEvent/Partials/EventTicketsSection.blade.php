@@ -31,7 +31,7 @@
                                             </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
-                                                @if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0)
+                                                @if ($has_deposit === false && ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0))
                                                     <br>
                                                     <span class="tax-amount text-muted text-smaller">Ticket Price Includes:
                                                     @if ($ticket->total_booking_fee > 0)
@@ -68,11 +68,13 @@
                                                     ?>
                                                     @if ($ticket->is_deposit)
                                                         (Deposit Only)
-                                                    @endif
-                                                    <span>{{money($ticket->total_price, $event->currency)}} </span>
-                                                    @if ($event->charge_tax)
-                                                        <br>
-                                                        <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span>
+                                                        <span>{{money($ticket->total_price, $event->currency)}} </span>
+                                                    @else
+                                                        <span>{{money($ticket->total_price, $event->currency)}} </span>
+                                                        @if ($event->charge_tax)
+                                                            <br>
+                                                            <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span>
+                                                        @endif
                                                     @endif
                                                     <meta property="priceCurrency"
                                                           content="{{ $event->currency->code }}">
