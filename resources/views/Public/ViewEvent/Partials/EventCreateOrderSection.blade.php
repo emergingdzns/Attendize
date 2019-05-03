@@ -39,7 +39,7 @@
                     @if($ticket['is_deposit'])
                         <div class="panel-footer">
                             <h5>
-                                Tickets: <span style="float: right;"><b>{{ money($ticket['full']['total'], $event->currency) }}</b></span>
+                                Tickets (Full Price): <span style="float: right;"><b>{{ money($ticket['full']['total'], $event->currency) }}</b></span>
                             </h5>
                             @if($ticket['ticket']->full_booking_fee > 0)
                                 <h5>
