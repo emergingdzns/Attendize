@@ -80,9 +80,13 @@ class EventOrdersController extends MyBaseController
     public function manageOrder(Request $request, $order_id)
     {
         $order = Order::scope()->find($order_id);
+        $orderSession = session()->get('ticket_order_'.$order->event->id);
 
-        $orderService = new OrderService($order->amount, $order->booking_fee, $order->gratuity, $order->event);
+        $orderService = new OrderService($order->amount, $order->booking_fee, $order->gratuity, $order->event, $orderSession);
         $orderService->calculateFinalCosts();
+        if ($orderSession['is_deposit_only']) {
+            $orderService->calculateFullFinalCosts();
+        }
 
         $data = [
             'order' => $order,

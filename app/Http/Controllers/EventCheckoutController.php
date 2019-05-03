@@ -86,16 +86,13 @@ class EventCheckoutController extends Controller
         $validation_messages = [];
         $tickets = [];
         $order_total = 0;
-        $final_total = 0;
-        $final_organiser_booking_fee = 0;
-        $final_booking_fee = 0;
-        $final_gratuity = 0;
         $total_ticket_quantity = 0;
         $booking_fee = 0;
         $organiser_booking_fee = 0;
         $gratuity = 0;
         $quantity_available_validation_rules = [];
         $balance_due = 0;
+        $full = ['total' => 0, 'gratuity' => 0, 'booking_fee' => 0, 'organiser_booking_fee' => 0];
 
         foreach ($ticket_ids as $ticket_id) {
             $current_ticket_quantity = (int)$request->get('ticket_' . $ticket_id);
@@ -139,18 +136,14 @@ class EventCheckoutController extends Controller
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             if ($ticket->is_deposit && $ticket->full_price > 0) {
                 $isDepositOnly = true;
-                $booking_fee = $booking_fee + 0;
-                $gratuity = $gratuity + 0;
-                $organiser_booking_fee = 0;
-                $final_total = $final_total + ($current_ticket_quantity * $ticket->full_price);
-                $final_booking_fee = $final_booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
-                $final_gratuity = $final_gratuity + ($current_ticket_quantity * $ticket->gratuity);
-                $final_organiser_booking_fee = $final_organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
-            } else {
-                $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
-                $gratuity = $gratuity + ($current_ticket_quantity * $ticket->gratuity);
-                $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
+                $full['total'] = $full['total'] + ($current_ticket_quantity * $ticket->full_price);
+                $full['gratuity'] = $full['gratuity'] + ($current_ticket_quantity * $ticket->full_gratuity);
+                $full['booking_fee'] = $full['booking_fee'] + ($current_ticket_quantity * $ticket->full_booking_fee);
+                $full['organiser_booking_fee'] = $full['organiser_booking_fee'] + ($current_ticket_quantity * $ticket->full_organiser_booking_fee);
             }
+            $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
+            $gratuity = $gratuity + ($current_ticket_quantity * $ticket->gratuity);
+            $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
             $ticketData = [
                 'ticket'                => $ticket,
@@ -160,24 +153,13 @@ class EventCheckoutController extends Controller
                 'booking_fee'           => ($current_ticket_quantity * $ticket->booking_fee),
                 'gratuity'              => ($current_ticket_quantity * $ticket->gratuity),
                 'organiser_booking_fee' => ($current_ticket_quantity * $ticket->organiser_booking_fee),
-                'full_price'            => ($ticket->is_deposit && $ticket->full_price > 0) ? $ticket->price : $ticket->price + $ticket->total_booking_fee + $ticket->gratuity
+                'full_price'            => ($ticket->is_deposit && $ticket->full_price > 0) ? $ticket->price : $ticket->price + $ticket->total_booking_fee + $ticket->gratuity,
+                'full'                  => $full
             ];
-            if ($ticket->is_deposit && $ticket->full_price > 0) {
-                $ticketData['finals'] = [
-                    'total' => $final_total,
-                    'booking_fee' => $final_booking_fee,
-                    'gratuity' => $final_gratuity,
-                    'organiser_booking_fee' => $final_organiser_booking_fee
-                ];
-            }
 
             $tickets[] = $ticketData;
 
-            $ticketBalance = (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
-
-            if ($ticket->is_deposit && $ticket->full_price > 0) {
-                $ticketBalance += $final_booking_fee + $final_organiser_booking_fee;
-            }
+            $ticketBalance = (($ticket->full_price * $current_ticket_quantity)- ($current_ticket_quantity * $ticket->price));
 
             $balance_due += $ticketBalance;
 
@@ -253,17 +235,15 @@ class EventCheckoutController extends Controller
             'order_total'             => $order_total,
             'booking_fee'             => $booking_fee,
             'gratuity'                => $gratuity,
-            'final_gratuity'          => $final_gratuity,
             'organiser_booking_fee'   => $organiser_booking_fee,
             'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
-            'final_booking_fee'       => $final_booking_fee + $final_organiser_booking_fee,
             'is_deposit_only'         => $isDepositOnly,
             'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway'         => $paymentGateway,
-            'balance_due'             => $balance_due
+            'balance_due'             => ($balance_due + $full['gratuity'] + $full['booking_fee'] + $full['organiser_booking_fee'])
         ]);
 
         /*
@@ -306,13 +286,11 @@ class EventCheckoutController extends Controller
 
         $event = Event::findorFail($order_session['event_id']);
 
-        if ($order_session['is_deposit_only']) {
-            $orderService = new OrderService($order_session['order_total'], $order_session['final_booking_fee'], $order_session['gratuity'], $event);
-        } else {
-            $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event);
-        }
+        $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event, $order_session);
         $orderService->calculateFinalCosts();
-        Log::debug($event->organizer_fee_percentage . " percent surcharge");
+        if ($order_session['is_deposit_only']) {
+            $orderService->calculateFullFinalCosts();
+        }
 
         $data = $order_session + [
                 'event'           => $event,
