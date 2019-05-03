@@ -57,6 +57,22 @@
                                             @if($ticket->is_deposit && $ticket->full_price > 0)
                                             Full Price {{money($ticket->full_price, $event->currency)}}
                                             @endif
+                                            <?php
+                                                $pluses = [];
+                                                if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0) {
+                                                    $pluses[] = lang("Public_ViewEvent.booking_fees");
+                                                }
+                                                if ($event->gratuity_fixed > 0 || $event->gratuity_percentage > 0)) {
+                                                    $pluses[] = lang("Public_ViewEvent.gratuity");
+                                                }
+                                                if ($event->charge_tax && $ticket->total_price*($event->organiser->tax_value)/100) > 0) {
+                                                    $pluses[] = $event->organiser->tax_name;
+                                                }
+                                            ?>
+                                            @if (count($pluses)>0)
+                                                <br>
+                                                <span class="tax-amount text-muted text-smaller">(+ {{implode(', ',$pluses)}})</span>
+                                            @endif
                                         </td>
                                         @endif
                                         <td style="min-width:200px; text-align: right;">
