@@ -145,7 +145,7 @@ class Ticket extends MyBaseModel
      */
     public function getGratuityAttribute()
     {
-        if ($this->is_desposit) {
+        if ($this->is_desposit == 1) {
             $usePrice = $this->full_price;
         } else {
             $usePrice = $this->price;
@@ -161,7 +161,7 @@ class Ticket extends MyBaseModel
      */
     public function getBookingFeeAttribute()
     {
-        if ($this->is_desposit) {
+        if ($this->is_desposit == 1) {
             $usePrice = $this->full_price;
         } else {
             $usePrice = $this->price;
@@ -177,7 +177,7 @@ class Ticket extends MyBaseModel
      */
     public function getOrganiserBookingFeeAttribute()
     {
-        if ($this->is_desposit) {
+        if ($this->is_desposit == 1) {
             $usePrice = $this->full_price;
         } else {
             $usePrice = $this->price;
