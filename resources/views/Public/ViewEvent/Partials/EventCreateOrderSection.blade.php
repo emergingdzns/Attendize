@@ -40,7 +40,6 @@
                 </div>
                 @if($order_total > 0)
                     @if($ticket['is_deposit'])
-                        <?php print_r($full); ?>
                         <div class="panel-footer">
                             <h5>
                                 Tickets (Full Price): <span style="float: right;"><b>{{ money($full['total'], $event->currency) }}</b></span>
