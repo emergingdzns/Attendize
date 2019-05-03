@@ -36,7 +36,7 @@
                     </table>
                 </div>
                 <pre>
-                <?php print_r(session->get('ticket_order_'.$event->id)); ?>
+                <?php print_r(session()->get('ticket_order_'.$event->id)); ?>
                 </pre>
                 @if($order_total > 0)
                     @if($ticket['is_deposit'])
