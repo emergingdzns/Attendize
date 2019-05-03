@@ -37,7 +37,7 @@ class MyBaseController extends Controller
         /*
          * Share the organizers across all views
          */
-        View::share('organisers', Organiser::scope()->get());
+        View::share('organisers', Organiser::scope()->orderBy('name', 'asc')->get());
     }
 
     /**

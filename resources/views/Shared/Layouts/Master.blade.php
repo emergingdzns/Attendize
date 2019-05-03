@@ -56,6 +56,11 @@
                         </a>
                     </li>
                     @endif
+
+                    @php 
+                        $organisers->sortBy('name');
+                    @endphp
+                    
                     @foreach($organisers as $org)
                         @if (Auth::user()->isOrganiserUser($org->id))
                         <li>
