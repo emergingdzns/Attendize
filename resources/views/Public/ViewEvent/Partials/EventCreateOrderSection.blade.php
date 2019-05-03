@@ -64,7 +64,7 @@
                             <hr>
                             <h5>
                                 <strong>Due Now:</strong>
-                                <span style="float: right;"><b>{{  money($full['total'], $event->currency) }}</b></span>
+                                <span style="float: right;"><b>{{  money($order_total, $event->currency) }}</b></span>
                             </h5>
                             @if($balance_due>0)
                                 <hr>
