@@ -153,14 +153,12 @@ class Ticket extends MyBaseModel
      */
     public function getGratuityAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),
-            2);
+        return (int)ceil($this->price) === 0 ? 0 : ($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed);
     }
 
     public function getFullGratuityAttribute()
     {
-        return (int)ceil($this->full_price) === 0 ? 0 : round(($this->full_price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),
-            2);
+        return (int)ceil($this->full_price) === 0 ? 0 : ($this->full_price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed);
     }
 
     /**
