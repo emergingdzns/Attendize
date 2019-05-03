@@ -22,15 +22,21 @@
                                 <?php
                                 $is_free_event = true;
                                 $has_deposit = false;
+                                foreach($tickets as $ticket) {
+                                    if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit){
+                                        $has_deposit = true;
+                                    }
+                                }
                                 ?>
                                 @foreach($tickets as $ticket)
-                                    @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
-                                        <?php
-                                        $has_deposit = true;
-                                        ?>
-                                    @endif
+                                    <?php
+                                        $thisTicketHasDeposit = false;
+                                        if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit){
+                                            $thisTicketHasDeposit = true;
+                                        }
+                                    ?>
                                     <tr class="ticket" property="offers" typeof="Offer">
-                                        <td @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit) colspan="2" @endif>
+                                        <td <?php if($has_deposit && $thisTicketHasDeposit === false):?> colspan="2"<?php endif; ?>>
                                             <span class="ticket-title semibold" property="name">
                                                 {{$ticket->title}}
                                             </span>
