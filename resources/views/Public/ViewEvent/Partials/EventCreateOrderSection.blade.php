@@ -43,20 +43,20 @@
                         <?php print_r($ticket['ticket']['full']); ?>
                         <div class="panel-footer">
                             <h5>
-                                Tickets (Full Price): <span style="float: right;"><b>{{ money($ticket['full']['total'], $event->currency) }}</b></span>
+                                Tickets (Full Price): <span style="float: right;"><b>{{ money($full['total'], $event->currency) }}</b></span>
                             </h5>
                             @if($ticket['ticket']['full']['organiser_booking_fee'] > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money($ticket['ticket']['full']['organiser_booking_fee'], $event->currency) }}</b></span>
+                                    Surcharge: <span style="float: right;"><b>{{ money($full['organiser_booking_fee'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
-                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['full']['total']+($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee'])), $event->currency) }}</b></span>
+                                Subtotal: <span style="float: right;"><b>{{ money(($full['total']+($full['booking_fee']+$full['organiser_booking_fee'])), $event->currency) }}</b></span>
                             </h5>
                             @if($ticket['full']['gratuity'] > 0)
                                 <h5>
                                     Gratuity:
-                                    <span style="float: right;"><b>{{ money($ticket['full']['gratuity'], $event->currency) }}</b></span>
+                                    <span style="float: right;"><b>{{ money($full['gratuity'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             @if($event->organiser->charge_tax && $event->charge_tax)
@@ -68,7 +68,7 @@
                             <hr>
                             <h5>
                                 <strong>Due Now:</strong>
-                                <span style="float: right;"><b>{{  money($ticket['full']['total'], $event->currency) }}</b></span>
+                                <span style="float: right;"><b>{{  money($full['total'], $event->currency) }}</b></span>
                             </h5>
                             @if($balance_due>0)
                                 <hr>
