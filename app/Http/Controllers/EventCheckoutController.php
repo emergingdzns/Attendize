@@ -134,8 +134,11 @@ class EventCheckoutController extends Controller
                 ]);
             }
 
+            $isDepositOnly = false;
+
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             if ($ticket->is_deposit && $ticket->full_price > 0) {
+                $isDepositOnly = true;
                 $booking_fee = $booking_fee + 0;
                 $gratuity = $gratuity + 0;
                 $organiser_booking_fee = 0;
@@ -250,9 +253,11 @@ class EventCheckoutController extends Controller
             'order_total'             => $order_total,
             'booking_fee'             => $booking_fee,
             'gratuity'                => $gratuity,
+            'final_gratuity'          => $final_gratuity,
             'organiser_booking_fee'   => $organiser_booking_fee,
             'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
             'final_booking_fee'       => $final_booking_fee + $final_organiser_booking_fee,
+            'is_deposit_only'         => $isDepositOnly,
             'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
@@ -301,7 +306,11 @@ class EventCheckoutController extends Controller
 
         $event = Event::findorFail($order_session['event_id']);
 
-        $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event);
+        if ($order_session['is_deposit_only']) {
+            $orderService = new OrderService($order_session['order_total'], $order_session['final_booking_fee'], $order_session['gratuity'], $event);
+        } else {
+            $orderService = new OrderService($order_session['order_total'], $order_session['total_booking_fee'], $order_session['gratuity'], $event);
+        }
         $orderService->calculateFinalCosts();
         Log::debug($event->organizer_fee_percentage . " percent surcharge");
 
