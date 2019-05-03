@@ -145,7 +145,12 @@ class Ticket extends MyBaseModel
      */
     public function getGratuityAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),
+        if ($this->is_desposit) {
+            $usePrice = $this->full_price;
+        } else {
+            $usePrice = $this->price;
+        }
+        return (int)ceil($usePrice) === 0 ? 0 : round(($usePrice * ($this->event->gratuity_percentage / 100)) + ($this->event->gratuity_fixed),
             2);
     }
 
@@ -156,7 +161,12 @@ class Ticket extends MyBaseModel
      */
     public function getBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
+        if ($this->is_desposit) {
+            $usePrice = $this->full_price;
+        } else {
+            $usePrice = $this->price;
+        }
+        return (int)ceil($usePrice) === 0 ? 0 : round(($usePrice * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
             2);
     }
 
@@ -167,7 +177,12 @@ class Ticket extends MyBaseModel
      */
     public function getOrganiserBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(($this->price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
+        if ($this->is_desposit) {
+            $usePrice = $this->full_price;
+        } else {
+            $usePrice = $this->price;
+        }
+        return (int)ceil($usePrice) === 0 ? 0 : round(($usePrice * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
             2);
     }
 
