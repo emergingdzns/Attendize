@@ -53,6 +53,7 @@
                         {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
                         <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
                     </h5>
+                    <!-- TODO: Suggested change: put gratuity before tax? -->
                     @if($ticket['gratuity'] > 0)
                         <h5>
                             Gratuity:
@@ -79,6 +80,12 @@
             <div class="help-block">
                 {!! @trans("Public_ViewEvent.time", ["time"=>"<span id='countdown'></span>"]) !!}
             </div>
+            <!-- New Gratuity Explanation Here -->
+            @if($ticket['ticket']->total_booking_fee > 0)
+            <div class="help-block">
+                {!! @trans("Public_ViewEvent.booking_fees_explanation_percent", ["percent"=>number_format($event->organiser_fee_percentage, 2) . '%']) !!}
+            </div>
+            @endif
         </div>
         <div class="col-md-8 col-md-pull-4">
             <div class="event_order_form">
