@@ -159,7 +159,7 @@ class EventCheckoutController extends Controller
 
             $tickets[] = $ticketData;
 
-            $ticketBalance = (($ticket->full_price * $current_ticket_quantity)- ($current_ticket_quantity * $ticket->price));
+            $ticketBalance = (($ticket->full_price * $current_ticket_quantity) - ($current_ticket_quantity * $ticket->price));
 
             $balance_due += $ticketBalance;
 
@@ -218,7 +218,7 @@ class EventCheckoutController extends Controller
 //            Log::debug($event->account->active_payment_gateway->toArray()); // This needs to be converted to an array
             $activeAccountPaymentGateway = count($event->account->active_payment_gateway->toArray()) ? $event->account->active_payment_gateway : false;
             $paymentGateway = count($event->account->active_payment_gateway->toArray()) ? $event->account->active_payment_gateway->payment_gateway : false;
-       }
+        }
 
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
