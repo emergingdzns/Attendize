@@ -90,12 +90,12 @@ class Order
         $this->orderFullTotalWithBookingFee = $this->order['full']['total'] + $this->order['full']['booking_fee'] + $this->order['full']['gratuity'] + $this->order['full']['organiser_booking_fee'];
 
         if ($this->event->organiser->charge_tax == 1 && $this->event->charge_tax == 1) {
-            $this->taxFullAmount = ($this->orderFullTotalWithBookingFee * $this->event->organiser->tax_value)/100;
+            $this->taxFullAmount = ($this->orderFullTotalWithBookingFee * ($this->event->organiser->tax_value/100));
         } else {
             $this->taxFullAmount = 0;
         }
 
-        $this->grandFullTotal = $this->orderFullTotalWithBookingFee + $this->taxAmount;
+        $this->grandFullTotal = $this->orderFullTotalWithBookingFee + $this->taxFullAmount;
     }
 
     /**
