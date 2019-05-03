@@ -58,7 +58,7 @@
                                                 @endif
                                             </p>
                                         </td>
-                                        @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit)
+                                        @if ($thisTicketHasDeposit)
                                         <td style="width:200px; text-align: center;">
                                             @if($ticket->is_deposit && $ticket->full_price > 0)
                                             Full Price {{money($ticket->full_price, $event->currency)}}
