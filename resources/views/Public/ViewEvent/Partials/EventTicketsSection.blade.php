@@ -26,7 +26,6 @@
                                 @foreach($tickets as $ticket)
                                     <tr class="ticket" property="offers" typeof="Offer">
                                         <td>
-                                            <?php print_r($ticket); ?>
                                             <span class="ticket-title semibold" property="name">
                                                 {{$ticket->title}}
                                             </span>
@@ -69,7 +68,7 @@
                                                     ?>
                                                     @if ($ticket->is_deposit)
                                                         (Deposit Only)
-                                                        <span>{{money($ticket->total_price, $event->currency)}} </span>
+                                                        <span>{{money($ticket->price, $event->currency)}} </span>
                                                     @else
                                                         <span>{{money($ticket->total_price, $event->currency)}} </span>
                                                         @if ($event->charge_tax)
