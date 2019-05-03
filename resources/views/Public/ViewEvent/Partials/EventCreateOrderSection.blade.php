@@ -40,13 +40,14 @@
                 </div>
                 @if($order_total > 0)
                     @if($ticket['is_deposit'])
+                        {{$ticket['ticket']['full']['organiser_booking_fee']}}
                         <div class="panel-footer">
                             <h5>
                                 Tickets (Full Price): <span style="float: right;"><b>{{ money($ticket['full']['total'], $event->currency) }}</b></span>
                             </h5>
-                            @if(($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee']) > 0)
+                            @if($ticket['ticket']['full']['organiser_booking_fee'] > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']['full']['booking_fee']+$ticket['ticket']['full']['organiser_booking_fee']), $event->currency) }}</b></span>
+                                    Surcharge: <span style="float: right;"><b>{{ money($ticket['ticket']['full']['organiser_booking_fee'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
