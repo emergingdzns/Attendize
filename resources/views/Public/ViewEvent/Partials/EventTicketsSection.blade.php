@@ -31,7 +31,7 @@
                                             </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
-                                                @if ($has_deposit === false && ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0))
+                                                @if ($has_deposit == false && ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0))
                                                     <br>
                                                     <span class="tax-amount text-muted text-smaller">Ticket Price Includes:
                                                     @if ($ticket->total_booking_fee > 0)
