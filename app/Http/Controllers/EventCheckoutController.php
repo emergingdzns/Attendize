@@ -243,7 +243,8 @@ class EventCheckoutController extends Controller
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => $activeAccountPaymentGateway,
             'payment_gateway'         => $paymentGateway,
-            'balance_due'             => ($balance_due + $full['gratuity'] + $full['booking_fee'] + $full['organiser_booking_fee'])
+            'balance_due'             => ($balance_due + $full['gratuity'] + $full['booking_fee'] + $full['organiser_booking_fee']),
+            'full'                    => $full
         ]);
 
         /*
