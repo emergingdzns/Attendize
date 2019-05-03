@@ -30,7 +30,7 @@
                                         ?>
                                     @endif
                                     <tr class="ticket" property="offers" typeof="Offer">
-                                        <td>
+                                        <td @if (($ticket->is_deposit && $ticket->full_price > 0) || $has_deposit) colspan="2" @endif>
                                             <span class="ticket-title semibold" property="name">
                                                 {{$ticket->title}}
                                             </span>
