@@ -8,6 +8,9 @@
         <div class="col-md-12" style="text-align: center">
             @lang("Public_ViewEvent.below_order_details_header")
         </div>
+        <pre>
+            <?php print_r($tickets); ?>
+        </pre>
         <div class="col-md-4 col-md-push-8">
             <div class="panel">
                 <div class="panel-heading">
