@@ -136,8 +136,8 @@ class EventCheckoutController extends Controller
 
             $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
             if ($ticket->is_deposit && $ticket->full_price > 0) {
-                $booking_fee = 0;
-                $gratuity = 0;
+                $booking_fee = $booking_fee + 0;
+                $gratuity = $gratuity + 0;
                 $organiser_booking_fee = 0;
                 $final_total = $final_total + ($current_ticket_quantity * $ticket->full_price);
                 $final_booking_fee = $final_booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
