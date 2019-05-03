@@ -59,7 +59,7 @@
                                 @endif
                                 <h5>
                                     {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
-                                    <span style="float: right;"><b>{{ $orderService->getFullTaxAmount(true) }}</b></span>
+                                    <span style="float: right;"><b>{{ $orderService->getTaxFullAmount(true) }}</b></span>
                                 </h5>
                                 <hr>
                                 <h5>
