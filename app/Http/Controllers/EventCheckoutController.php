@@ -86,6 +86,10 @@ class EventCheckoutController extends Controller
         $validation_messages = [];
         $tickets = [];
         $order_total = 0;
+        $final_total = 0;
+        $final_organiser_booking_fee = 0;
+        $final_booking_fee = 0;
+        $final_gratuity = 0;
         $total_ticket_quantity = 0;
         $booking_fee = 0;
         $organiser_booking_fee = 0;
