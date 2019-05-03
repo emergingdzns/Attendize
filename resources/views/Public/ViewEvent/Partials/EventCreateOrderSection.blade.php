@@ -71,7 +71,7 @@
                                 <hr>
                                 <h5>
                                     <strong>Due at Event:</strong>
-                                    <span style="float: right;"><b>{{ money(((($full['total']+$full['gratuity'])*($event->organiser->tax_value/100))-$order_total), $event->currency) }}</b></span>
+                                    <span style="float: right;"><b>{{ money(($full['total'] + (($full['total']+$full['gratuity'])*($event->organiser->tax_value/100)) - $order_total), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                         </div>
