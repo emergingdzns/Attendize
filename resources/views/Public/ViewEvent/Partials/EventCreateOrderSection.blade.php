@@ -8,9 +8,6 @@
         <div class="col-md-12" style="text-align: center">
             @lang("Public_ViewEvent.below_order_details_header")
         </div>
-        <pre>
-            <?php print_r($tickets); ?>
-        </pre>
         <div class="col-md-4 col-md-push-8">
             <div class="panel">
                 <div class="panel-heading">
@@ -67,7 +64,7 @@
                             <hr>
                             <h5>
                                 <strong>Due Now:</strong>
-                                <span style="float: right;"><b>{{  money($full['total'], $event->currency) }}</b></span>
+                                <span style="float: right;"><b>{{  money($order_total, $event->currency) }}</b></span>
                             </h5>
                             @if($balance_due>0)
                                 <hr>
