@@ -36,44 +36,85 @@
                     </table>
                 </div>
                 @if($order_total > 0)
-                <div class="panel-footer">
-                    <h5>
-                        Tickets: <span style="float: right;"><b>{{ money($ticket['price'], $event->currency) }}</b></span>
-                    </h5>
-                    @if($ticket['ticket']->total_booking_fee > 0)
-                        <h5>
-                            Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
-                        </h5>
+                    @if($ticket['is_deposit'])
+                        <div class="panel-footer">
+                            <h5>
+                                Tickets: <span style="float: right;"><b>{{ money($ticket['finals']['total'], $event->currency) }}</b></span>
+                            </h5>
+                            @if($ticket['ticket']->final_total_booking_fee > 0)
+                                <h5>
+                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->final_total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                                </h5>
+                            @endif
+                            <h5>
+                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['finals']['total']+($ticket['ticket']->final_total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
+                            </h5>
+                            @if($event->organiser->charge_tax && $event->charge_tax)
+                                <h5>
+                                    {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
+                                    <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
+                                </h5>
+                                <!-- TODO: Suggested change: put gratuity before tax? -->
+                                @if($ticket['finals']['gratuity'] > 0)
+                                    <h5>
+                                        Gratuity:
+                                        <span style="float: right;"><b>{{ money($ticket['finals']['gratuity'], $event->currency) }}</b></span>
+                                    </h5>
+                                @endif
+                                <hr>
+                                <h5>
+                                    <strong>Due Now:</strong>
+                                    <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
+                                </h5>
+                            @endif
+                            @if($balance_due>0)
+                                <hr>
+                                <h5>
+                                    <strong>Due at Event:</strong>
+                                    <span style="float: right;"><b>{{ money($balance_due, $event->currency) }}</b></span>
+                                </h5>
+                            @endif
+                        </div>
+                    @else
+                        <div class="panel-footer">
+                            <h5>
+                                Tickets: <span style="float: right;"><b>{{ money($ticket['price'], $event->currency) }}</b></span>
+                            </h5>
+                            @if($ticket['ticket']->total_booking_fee > 0)
+                                <h5>
+                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                                </h5>
+                            @endif
+                            <h5>
+                                Subtotal: <span style="float: right;"><b>{{ money(($ticket['price']+($ticket['ticket']->total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
+                            </h5>
+                            @if($event->organiser->charge_tax && $event->charge_tax)
+                            <h5>
+                                {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
+                                <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
+                            </h5>
+                            <!-- TODO: Suggested change: put gratuity before tax? -->
+                            @if($ticket['gratuity'] > 0)
+                                <h5>
+                                    Gratuity:
+                                    <span style="float: right;"><b>{{ money($ticket['gratuity'], $event->currency) }}</b></span>
+                                </h5>
+                            @endif
+                            <hr>
+                            <h5>
+                                <strong>Grand Total:</strong>
+                                <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
+                            </h5>
+                            @endif
+                            @if($balance_due>0)
+                                <hr>
+                                <h5>
+                                    <strong>Due at Event:</strong>
+                                    <span style="float: right;"><b>{{ money($balance_due, $event->currency) }}</b></span>
+                                </h5>
+                            @endif
+                        </div>
                     @endif
-                    <h5>
-                        Subtotal: <span style="float: right;"><b>{{ money(($ticket['price']+($ticket['ticket']->total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
-                    </h5>
-                    @if($event->organiser->charge_tax && $event->charge_tax)
-                    <h5>
-                        {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
-                        <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
-                    </h5>
-                    <!-- TODO: Suggested change: put gratuity before tax? -->
-                    @if($ticket['gratuity'] > 0)
-                        <h5>
-                            Gratuity:
-                            <span style="float: right;"><b>{{ money($ticket['gratuity'], $event->currency) }}</b></span>
-                        </h5>
-                    @endif
-                    <hr>
-                    <h5>
-                        <strong>Grand Total:</strong>
-                        <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
-                    </h5>
-                    @endif
-                    @if($balance_due>0)
-                        <hr>
-                        <h5>
-                            <strong>Due at Event:</strong>
-                            <span style="float: right;"><b>{{ money($balance_due, $event->currency) }}</b></span>
-                        </h5>
-                    @endif
-                </div>
                 @endif
 
             </div>
