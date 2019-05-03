@@ -58,7 +58,8 @@
                             @if($event->organiser->charge_tax && $event->charge_tax)
                                 <h5>
                                     {{ $event->organiser->tax_name }} ({{ $event->organiser->tax_value }}%):
-                                    <span style="float: right;"><b>{{ $orderService->getTaxFullAmount(true) }}</b></span>
+                                    <?php /*$orderService->getTaxFullAmount(true)*/ ?>
+                                    <span style="float: right;"><b>{{ money((($full['total']+$full['booking_fee']+$full['organiser_booking_fee']+$full['gratuity'])*($event->organiser->tax_value/100)), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <hr>
