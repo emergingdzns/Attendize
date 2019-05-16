@@ -383,9 +383,12 @@ class EventCheckoutController extends Controller
                         ]);
                 }
 
-                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event);
+                $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event, $ticket_order);
                 $orderService->calculateFinalCosts();
-              
+                if ($ticket_order['is_deposit_only']) {
+                    $orderService->calculateFullFinalCosts();
+                }
+
                 $transaction_data += [
                         'amount'      => $orderService->getGrandTotal(),
                         'currency'    => $event->currency->code,
