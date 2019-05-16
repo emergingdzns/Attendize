@@ -6,6 +6,14 @@
     </div>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
+            <?php if (session()->has('error')): ?>
+            <div class="bg-danger">
+                {{session()->get('error')}}
+            </div>
+            <?php
+            session()->forget('error');
+            endif;
+            ?>
             @lang("Public_ViewEvent.below_order_details_header")
         </div>
         <div class="col-md-4 col-md-push-8">
