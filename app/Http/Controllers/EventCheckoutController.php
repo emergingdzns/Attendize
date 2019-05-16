@@ -781,7 +781,7 @@ class EventCheckoutController extends Controller
             abort(404);
         }
 
-        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->gratuity, $order->event);
+        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->gratuity, $order->event, $order);
         $orderService->calculateFinalCosts();
 
         $data = [

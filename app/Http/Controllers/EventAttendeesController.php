@@ -156,7 +156,7 @@ class EventAttendeesController extends MyBaseController
             $order->event_id = $event_id;
 
             // Calculating grand total including tax
-            $orderService = new OrderService($ticket_price, 0, $event);
+            $orderService = new OrderService($ticket_price, 0, 0, $event, $order);
             $orderService->calculateFinalCosts();
             $order->taxamt = $orderService->getTaxAmount();
 
