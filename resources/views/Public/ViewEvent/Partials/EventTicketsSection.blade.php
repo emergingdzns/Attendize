@@ -42,18 +42,22 @@
                                             </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
+                                                <?php
+                                                $pluses = [];
+                                                if ($event->charge_tax && ($ticket->total_price*($event->organiser->tax_value)/100) > 0) {
+                                                    $pluses[] = $event->organiser->tax_name;
+                                                }
+                                                if ($event->gratuity_fixed > 0 || $event->gratuity_percentage > 0) {
+                                                    $pluses[] = 'Gratuity';
+                                                }
+                                                if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0) {
+                                                    $pluses[] = 'Surcharge';
+                                                }
+                                                ?>
                                                 @if ($thisTicketHasDeposit == false && ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0))
                                                     <br>
                                                     <span class="tax-amount text-muted text-smaller">Ticket Price Includes:
-                                                    @if ($ticket->total_booking_fee > 0)
-                                                        {{money($ticket->total_booking_fee, $event->currency)}} @lang("Public_ViewEvent.booking_fees")
-                                                    @endif
-                                                    @if ($ticket->total_booking_fee > 0 and $ticket->gratuity > 0)
-                                                        +
-                                                    @endif
-                                                    @if ($ticket->gratuity > 0)
-                                                        {{money($ticket->gratuity, $event->currency)}} @lang("Public_ViewEvent.gratuity")
-                                                    @endif
+                                                    {{implode(', ',$pluses)}}
                                                     </span>
                                                 @endif
                                             </p>
@@ -62,22 +66,6 @@
                                         <td style="width:200px; text-align: center;">
                                             @if($ticket->is_deposit && $ticket->full_price > 0)
                                             Full Price {{money($ticket->full_price, $event->currency)}}
-                                            @endif
-                                            <?php
-                                                $pluses = [];
-                                                if ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0) {
-                                                    $pluses[] = 'Surcharge';
-                                                }
-                                                if ($event->gratuity_fixed > 0 || $event->gratuity_percentage > 0) {
-                                                    $pluses[] = 'Gratuity';
-                                                }
-                                                if ($event->charge_tax && ($ticket->total_price*($event->organiser->tax_value)/100) > 0) {
-                                                    $pluses[] = $event->organiser->tax_name;
-                                                }
-                                            ?>
-                                            @if (count($pluses)>0)
-                                                <br>
-                                                <span class="tax-amount text-muted text-smaller">(+ {{implode(', ',$pluses)}})</span>
                                             @endif
                                         </td>
                                         @endif
@@ -94,10 +82,10 @@
                                                         (Deposit Only)
                                                         <span>{{money($ticket->price, $event->currency)}} </span>
                                                     @else
-                                                        <span>{{money($ticket->total_price, $event->currency)}} </span>
                                                         @if ($event->charge_tax)
-                                                            <br>
-                                                            <span class="tax-amount text-muted text-smaller">{{ ($event->organiser->tax_name && $event->organiser->tax_value) ? '(+'.money(($ticket->total_price*($event->organiser->tax_value)/100), $event->currency).' '.$event->organiser->tax_name.')' : '' }}</span>
+                                                            <span>{{money($ticket->total_price + ($ticket->total_price*($event->organiser->tax_value)/100), $event->currency)}} </span>
+                                                        @else
+                                                            <span>{{money($ticket->total_price, $event->currency)}} </span>
                                                         @endif
                                                     @endif
                                                     <meta property="priceCurrency"
