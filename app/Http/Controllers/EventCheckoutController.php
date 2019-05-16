@@ -607,7 +607,7 @@ class EventCheckoutController extends Controller
             $order->balance_due = $ticket_order['balance_due'];
 
             // Calculating grand total including tax
-            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event);
+            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $ticket_order['gratuity'], $event, $ticket_order);
             $orderService->calculateFinalCosts();
 
             $order->taxamt = $orderService->getTaxAmount();
