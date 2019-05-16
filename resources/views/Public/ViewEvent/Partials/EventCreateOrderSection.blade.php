@@ -43,7 +43,7 @@
                             </h5>
                             @if($full['organiser_booking_fee'] > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money($full['organiser_booking_fee'], $event->currency) }}</b></span>
+                                    4% Surcharge <sup>*</sup>: <span style="float: right;"><b>{{ money($full['organiser_booking_fee'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
@@ -51,7 +51,7 @@
                             </h5>
                             @if($full['gratuity'] > 0)
                                 <h5>
-                                    Gratuity:
+                                    Gratuity<?php if ($event->gratuity_percentage > 0): ?> ({{$event->gratuity_percentage}}%)<?php endif; ?>:
                                     <span style="float: right;"><b>{{ money($full['gratuity'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
@@ -82,7 +82,7 @@
                             </h5>
                             @if($ticket['ticket']->total_booking_fee > 0)
                                 <h5>
-                                    Surcharge: <span style="float: right;"><b>{{ money(($ticket['ticket']->total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
+                                    4% Surcharge <sup>*</sup>: <span style="float: right;"><b>{{ money(($ticket['ticket']->total_booking_fee * $ticket['qty']), $event->currency) }}</b></span>
                                 </h5>
                             @endif
                             <h5>
@@ -92,7 +92,7 @@
                             <!-- TODO: Suggested change: put gratuity before tax? -->
                             @if($ticket['gratuity'] > 0)
                                 <h5>
-                                    Gratuity:
+                                    Gratuity<?php if ($event->gratuity_percentage > 0): ?> ({{$event->gratuity_percentage}}%)<?php endif; ?>:
                                     <span style="float: right;"><b>{{ money($ticket['gratuity'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
@@ -124,7 +124,7 @@
             <!-- New Gratuity Explanation Here -->
             @if($ticket['ticket']->total_booking_fee > 0)
             <div class="help-block">
-                {!! @trans("Public_ViewEvent.booking_fees_explanation_percent", ["percent"=>number_format($event->organiser_fee_percentage, 2) . '%']) !!}
+                <sup>*</sup> {!! @trans("Public_ViewEvent.booking_fees_explanation_percent", ["percent"=>number_format($event->organiser_fee_percentage, 0) . '%']) !!}
             </div>
             @endif
         </div>
