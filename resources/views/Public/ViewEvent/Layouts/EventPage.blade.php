@@ -68,6 +68,14 @@
 
     </head>
     <body class="attendize">
+        <?php if (session()->has('error')): ?>
+        <div class="bg-danger">
+            {{session()->get('error')}}
+        </div>
+        <?php
+            session()->forget('error');
+            endif;
+        ?>
         <div id="event_page_wrap" vocab="http://schema.org/" typeof="Event">
             @yield('content')
 

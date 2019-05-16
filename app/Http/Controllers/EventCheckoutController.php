@@ -491,10 +491,14 @@ class EventCheckoutController extends Controller
 
                 } else {
                     // display error to customer
+                    session()->push('error',$response->getMessage());
+                    return redirect()->back();
+/*
                     return response()->json([
                         'status'  => 'error',
                         'message' => $response->getMessage(),
                     ]);
+ */
                 }
             } catch (\Exeption $e) {
                 Log::error($e);
