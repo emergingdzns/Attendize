@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <?php if (session()->has('error')): ?>
-            <div class="bg-danger">
+            <div class="bg-danger" style="padding:10px 20px;text-align: left;">
                 {{session()->get('error')}}
             </div>
             <?php
