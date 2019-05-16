@@ -89,7 +89,6 @@
                                 Subtotal: <span style="float: right;"><b>{{ money(($ticket['price']+($ticket['ticket']->total_booking_fee * $ticket['qty'])), $event->currency) }}</b></span>
                             </h5>
                             @if($event->organiser->charge_tax && $event->charge_tax)
-                            <!-- TODO: Suggested change: put gratuity before tax? -->
                             @if($ticket['gratuity'] > 0)
                                 <h5>
                                     Gratuity<?php if ($event->gratuity_percentage > 0): ?> ({{$event->gratuity_percentage}}%)<?php endif; ?>:

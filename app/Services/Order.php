@@ -150,7 +150,7 @@ class Order
             return number_format($this->grandTotal, 2, '.', '');
         }
 
-        return money($this->grandFullTotal, $this->event->currency);
+        return money($this->grandTotal, $this->event->currency);
 
     }
     public function getGrandFullTotal($currencyFormatted = false) {
