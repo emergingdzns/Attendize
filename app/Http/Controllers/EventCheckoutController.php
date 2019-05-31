@@ -491,7 +491,7 @@ class EventCheckoutController extends Controller
 
                 } else {
                     // display error to customer
-                    session()->put('error','There was an error processing your credit card. The error returned was: '$response->getMessage());
+                    session()->put('error','There was an error processing your credit card. The error returned was: '.$response->getMessage());
                     return redirect()->back();
 /*
                     return response()->json([
