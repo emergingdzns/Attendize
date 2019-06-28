@@ -56,7 +56,7 @@
                                                 ?>
                                                 @if ($thisTicketHasDeposit == false && ($event->organiser_fee_fixed > 0 || $event->organiser_fee_percentage > 0 || $event->gratuity_fixed > 0 || $event->gratuity_percentage > 0))
                                                     <br>
-                                                    <span class="tax-amount text-muted text-smaller">Ticket Price Includes:
+                                                    <span class="tax-amount text-muted text-smaller">Ticket Price Does Not Include:
                                                     {{implode(', ',$pluses)}}
                                                     </span>
                                                 @endif
@@ -83,7 +83,7 @@
                                                         <span>{{money($ticket->price, $event->currency)}} </span>
                                                     @else
                                                         @if ($event->charge_tax)
-                                                            <span>{{money($ticket->total_price + ($ticket->total_price*($event->organiser->tax_value)/100), $event->currency)}} </span>
+                                                            <span>{{money($ticket->price, $event->currency)}} </span>
                                                         @else
                                                             <span>{{money($ticket->total_price, $event->currency)}} </span>
                                                         @endif
