@@ -99,7 +99,7 @@
                             @if($event->organiser->charge_tax && $event->charge_tax)
                             @if($ticket['gratuity'] > 0)
                                 <h5>
-                                    Gratuity<?php if ($event->gratuity_percentage > 0): ?> ({{$event->gratuity_percentage}}%)<?php endif; ?>:
+                                    Gratuity<?php if ($event->gratuity_percentage > 0): ?> ({{intval($event->gratuity_percentage)}}%)<?php endif; ?>:
                                     <span style="float: right;"><b>{{ money($ticket['gratuity'], $event->currency) }}</b></span>
                                 </h5>
                             @endif
