@@ -22,7 +22,8 @@
                 status: false
             });
             simplemde.render();
-        });
+        })
+
         $("#DatePicker").remove();
         var $div = $("<div>", {id: "DatePicker"});
         $("body").append($div);
