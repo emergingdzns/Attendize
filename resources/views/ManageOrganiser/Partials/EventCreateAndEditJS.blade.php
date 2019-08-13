@@ -24,13 +24,12 @@
             simplemde.render();
         });
         $("#DatePicker").remove();
-                var $div = $("<div>", {id: "DatePicker"});
-                $("body").append($div);
-        /*
-                $div.DateTimePicker({
-                    dateTimeFormat: window.Attendize.DateTimeFormat
-                });
-        */
+        var $div = $("<div>", {id: "DatePicker"});
+        $("body").append($div);
+        $div.DateTimePicker({
+            dateTimeFormat: window.Attendize.DateTimeFormat
+        });
+
     });
 </script>
 <style>
