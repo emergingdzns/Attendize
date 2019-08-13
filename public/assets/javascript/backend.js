@@ -10722,13 +10722,14 @@ $.cf = {
 
     /* Datepicker */
     $(document).ajaxComplete(function () {
-        $('#DatePicker').remove();
-        var $div = $("<div>", {id: "DatePicker"});
-        $("body").append($div);
-        $div.DateTimePicker({
-            dateTimeFormat: Attendize.DateTimeFormat
-        });
-
+        if ($('#DatePicker').size() == 0) {
+            $('#DatePicker').remove();
+            var $div = $("<div>", {id: "DatePicker"});
+            $("body").append($div);
+            $div.DateTimePicker({
+                dateTimeFormat: Attendize.DateTimeFormat
+            });
+        }
     });
 
     /* Responsive sidebar */
