@@ -73,8 +73,8 @@
     position:absolute;
     top:50%;
     height:300px;
-    left: 175px;
-    width: 400px;
+    left: 0;
+    width: 470px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -94,12 +94,12 @@
 .ticket .event_details {
     left: 0px;
     overflow: hidden;
-    max-width: 200px;
+    max-width: 235px;
     text-overflow: ellipsis;
 }
 
 .ticket .attendee_details {
-    left: 200px;
+    left: 235px;
     overflow: hidden;
     max-width: 195px;
     text-overflow: ellipsis;
@@ -117,7 +117,8 @@
 }
 
 .ticket .logo img {
-    max-width: 330px;
+    max-width: 220px;
+    max-height: 300px;
 }
 
 .ticket .foot {
