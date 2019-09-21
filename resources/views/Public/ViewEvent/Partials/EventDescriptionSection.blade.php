@@ -21,6 +21,14 @@
         <div class="col-md-12">
             <div class="content event_details" property="description">
                 {!! Markdown::parse($event->description) !!}
+                <div style="text-align:center">
+                    <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
+                    @if(count($images)>0)
+                        @foreach($images as $img)
+                            <BR><img src="data:image/png;base64, {{$img}}" />
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
         <?php /*@endif*/ ?>

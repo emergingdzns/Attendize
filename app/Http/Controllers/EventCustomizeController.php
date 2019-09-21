@@ -10,6 +10,14 @@ use Validator;
 
 class EventCustomizeController extends MyBaseController
 {
+
+    public function archiveEvent($event_id = '')
+    {
+        $event = Event::scope()->findOrFail($event_id);
+        $event->delete();
+        return redirect()->route('showOrganiserEvents',$event->organiser->id);
+    }
+
     /**
      * Show the event customize page
      *
