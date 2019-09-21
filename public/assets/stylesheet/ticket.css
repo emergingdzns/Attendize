@@ -8,8 +8,8 @@
     background: #000;
     position: relative;
     height: 330px;
-    font-size: 12px;
-    color: #999;
+    font-size: 15px;
+    color: #333;
     border-left-width: 3px;
     border-left-color: #000;
     overflow: hidden;
@@ -117,7 +117,7 @@
 }
 
 .ticket .logo img {
-    max-width: 110px;
+    max-width: 330px;
 }
 
 .ticket .foot {

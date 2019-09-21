@@ -571,6 +571,11 @@ Route::group(
              * Customize Design etc.
              * -------
              */
+            Route::get('{event_id}/archive', [
+                'as'   => 'archiveEvent',
+                'uses' => 'EventCustomizeController@archiveEvent',
+            ]);
+
             Route::get('{event_id}/customize', [
                 'as'   => 'showEventCustomize',
                 'uses' => 'EventCustomizeController@showCustomize',

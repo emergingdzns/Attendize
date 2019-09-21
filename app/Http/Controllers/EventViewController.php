@@ -31,10 +31,18 @@ class EventViewController extends Controller
             return view('Public.ViewEvent.EventNotLivePage');
         }
 
+        $images = [];
+        $imgs = $event->images;
+        foreach ($imgs as $img) {
+            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
+        }
+
         $data = [
             'event'       => $event,
             'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('sort_order', 'asc')->get(),
             'is_embedded' => 0,
+            'image'     => base64_encode(file_get_contents(public_path($event->organiser->full_logo_path))),
+            'images'      => $images
         ];
         /*
          * Don't record stats if we're previewing the event page from the backend or if we own the event.
