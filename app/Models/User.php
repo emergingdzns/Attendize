@@ -121,7 +121,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         foreach($orgs as $org) {
             $organisers[] = $org->id;
         }
-        if ($this->is_parent || in_array($organiserId,$organisers) ) {
+        if ($this->is_parent || in_array($organiserId,$organisers) || count($organisers) == 0) {
             return true;
         }
         return false;
