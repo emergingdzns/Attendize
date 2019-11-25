@@ -32,6 +32,12 @@ class Ticket extends MyBaseModel
     ];
     protected $perPage = 10;
 
+    protected $fillable = ['created_at','updated_at','deleted_at','edited_by_user_id','account_id','order_id',
+                           'event_id','title','description','price','max_per_person','min_per_person',
+                           'quantity_available','quantity_sold','start_sale_date','end_sale_date','sales_volume',
+                           'organiser_fees_volume','is_paused','public_id','user_id','sort_order','is_hidden',
+                           'is_deposit','full_price'];
+
     /**
      * The event associated with the ticket.
      *

@@ -63,6 +63,7 @@ class EventCustomizeController extends MyBaseController
         if (count($tickets) > 0) {
             foreach($tickets as $ticket) {
                 $ticket = $ticket->toArray();
+                unset($ticket['id']);
                 $ticket['event_id'] = $newEvent->id;
                 $ticket['created_at'] = date('Y-m-d H:i:s');
                 $ticket['updated_at'] = date('Y-m-d H:i:s');
