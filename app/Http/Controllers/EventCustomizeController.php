@@ -44,7 +44,7 @@ class EventCustomizeController extends MyBaseController
         $newEvent->save();
 
         // now get images and duplicate them
-        $images = EventImage::where('event_id',$event->id)->get();
+        $images = EventImage::where('event_id',$event_id)->get();
         if (count($images) > 0) {
             foreach($images as $image) {
                 $newImage = new EventImage();
@@ -59,7 +59,7 @@ class EventCustomizeController extends MyBaseController
         }
 
         // now get tickets for the event and duplicate them
-        $tickets = Ticket::where('event_id',$event->id)->get();
+        $tickets = Ticket::where('event_id',$event_id)->get();
         if (count($tickets) > 0) {
             foreach($tickets as $ticket) {
                 $ticket = $ticket->toArray();
