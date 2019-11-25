@@ -39,6 +39,7 @@ class EventCustomizeController extends MyBaseController
         $event['is_live'] = 0;
         $event['created_at'] = date('Y-m-d H:i:s');
         $event['updated_at'] = date('Y-m-d H:i:s');
+        $event['slug'] .= str_random('5');
         $newEvent = new Event();
         $newEvent->fill($event);
         $newEvent->save();

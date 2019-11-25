@@ -46,7 +46,7 @@ class Event extends MyBaseModel
                            'organiser_fee_percentage','organiser_id','venue_name','venue_name_full','location_address',
                            'location_address_line_1','location_address_line_2','location_country','location_country_code',
                            'location_state','location_post_code','location_street_number','location_lat','location_long',
-                           'location_google_place_id','pre_order_display_message','post_order_display_message',
+                           'location_google_place_id','pre_order_display_message','post_order_display_message','slug',
                            'social_share_text','social_show_facebook','social_show_linkedin','social_show_twitter',
                            'social_show_email','social_show_googleplus','location_is_manual','is_live','created_at',
                            'updated_at','deleted_at','barcode_type','ticket_border_color','ticket_bg_color','bg_color',

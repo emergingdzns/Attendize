@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('slug', 'Custom URL Slug', array('class'=>'control-label required')) !!}
+            {!! Form::label('slug', 'Custom URL Slug', array('class'=>'control-label')) !!}
             {!!  Form::text('slug', Input::old('slug'),
                                         array(
                                         'class'=>'form-control',
