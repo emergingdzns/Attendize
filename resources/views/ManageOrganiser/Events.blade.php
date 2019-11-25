@@ -53,6 +53,7 @@
                 <div class="order_options">
                     <span class="event_count">
                         @lang("Event.num_events", ["num" => $organiser->events->count()])
+                        &nbsp;&nbsp;[<a href="{{ route('showOrganiserEvents',[$organiser->id]) }}?archived=true">Show Archived</a>]
                     </span>
                 </div>
             </div>

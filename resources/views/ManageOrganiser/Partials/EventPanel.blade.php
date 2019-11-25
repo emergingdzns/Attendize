@@ -43,6 +43,11 @@
         <ul class="nav nav-section nav-justified">
             @if(Auth::user()->isAdmin())
             <li>
+                <a href="{{route('duplicateEvent', ['event_id' => $event->id])}}">
+                    <i class="ico-copy"></i> Duplicate
+                </a>
+            </li>
+            <li>
                 <a href="{{route('archiveEvent', ['event_id' => $event->id])}}">
                     <i class="ico-archive"></i> Archive
                 </a>

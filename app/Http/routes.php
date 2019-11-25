@@ -576,6 +576,12 @@ Route::group(
                 'uses' => 'EventCustomizeController@archiveEvent',
             ]);
 
+
+            Route::get('{event_id}/duplicate', [
+                'as'   => 'duplicateEvent',
+                'uses' => 'EventCustomizeController@duplicateEvent',
+            ]);
+
             Route::get('{event_id}/customize', [
                 'as'   => 'showEventCustomize',
                 'uses' => 'EventCustomizeController@showCustomize',

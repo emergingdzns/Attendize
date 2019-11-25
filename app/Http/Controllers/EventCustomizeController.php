@@ -18,6 +18,49 @@ class EventCustomizeController extends MyBaseController
         return redirect()->route('showOrganiserEvents',$event->organiser->id);
     }
 
+    public function duplicateEvent($event_id)
+    {
+        $event = Event::scope()->findOrFail($event_id)->withTrashed();
+
+        unset($event->id);
+        unset($event->deleted_at);
+        $event->is_live = 0;
+        $event->created_at = date('Y-m-d H:i:s');
+        $event->updated_at = date('Y-m-d H:i:s');
+        $newEvent = new Event();
+        $newEvent->fill($event);
+        $newEvent->save();
+
+        // now get images and duplicate them
+        $images = EventImage::where('event_id',$event->id)->get();
+        if (count($images) > 0) {
+            foreach($images as $image) {
+                $newImage = new EventImage();
+                $newImage->image_path = $image->image_path;
+                $newImage->created_at = date('Y-m-d H:i:s');
+                $newImage->updated_at = date('Y-m-d H:i:s');
+                $newImage->event_id = $newEvent->id;
+                $newImage->account_id = $image->account_id;
+                $newImage->user_id = $image->user_id;
+                $newImage->save();
+            }
+        }
+
+        // now get tickets for the event and duplicate them
+        $tickets = Ticket::where('event_id',$event->id)->get();
+        if (count($tickets) > 0) {
+            foreach($tickets as $ticket) {
+                $ticket->event_id = $newEvent->id;
+                $ticket->created_at = date('Y-m-d H:i:s');
+                $ticket->updated_at = date('Y-m-d H:i:s');
+                $newTicket = new Ticket();
+                $newTicket->fill($ticket);
+            }
+        }
+
+        redirect()->route('showOrganiserEvents',[$event->organiser_id]);
+    }
+
     /**
      * Show the event customize page
      *
