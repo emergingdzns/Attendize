@@ -575,6 +575,10 @@ Route::group(
                 'as'   => 'archiveEvent',
                 'uses' => 'EventCustomizeController@archiveEvent',
             ]);
+            Route::get('{event_id}/restore', [
+                'as'   => 'restoreEvent',
+                'uses' => 'EventCustomizeController@restoreEvent',
+            ]);
 
 
             Route::get('{event_id}/duplicate', [

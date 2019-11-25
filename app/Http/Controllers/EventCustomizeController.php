@@ -18,6 +18,13 @@ class EventCustomizeController extends MyBaseController
         return redirect()->route('showOrganiserEvents',$event->organiser->id);
     }
 
+    public function restoreEvent($event_id = '')
+    {
+        $event = Event::withTrashed()->scope()->findOrFail($event_id);
+        $event->deleted_at = null;
+        $event->save();
+        return redirect()->route('showOrganiserEvents',$event->organiser->id);
+    }
     public function duplicateEvent($event_id)
     {
         $event = Event::scope()->findOrFail($event_id)->withTrashed();
