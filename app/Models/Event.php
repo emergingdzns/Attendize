@@ -41,6 +41,20 @@ class Event extends MyBaseModel
         'venue_name_full.required_without'     => 'Please enter a venue for your event',
     ];
 
+    protected $fillable = ['title','description','start_date','end_date','on_sale_date','account_id','user_id','bg_type',
+                           'currency_id','sales_volume','organiser_fee_volume','organiser_fee_fixed','location',
+                           'organiser_fee_percentage','organiser_id','venue_name','venue_name_full','location_address',
+                           'location_address_line_1','location_address_line_2','location_country','location_country_code',
+                           'location_state','location_post_code','location_street_number','location_lat','location_long',
+                           'location_google_place_id','pre_order_display_message','post_order_display_message',
+                           'social_share_text','social_show_facebook','social_show_linkedin','social_show_twitter',
+                           'social_show_email','social_show_googleplus','location_is_manual','is_live','created_at',
+                           'updated_at','deleted_at','barcode_type','ticket_border_color','ticket_bg_color','bg_color',
+                           'ticket_text_color','ticket_sub_text_color','social_show_whatsapp','questions_collection_type',
+                           'checkout_timeout_after','is_1d_barcode_enabled','enable_offline_payments','charge_tax',
+                           'offline_payment_instructions','gratuity_fixed','gratuity_percentage','organiser_name',
+                           'bg_image_path'];
+
     /**
      * The questions associated with the event.
      *
