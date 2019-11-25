@@ -69,6 +69,7 @@ class EventCustomizeController extends MyBaseController
                 $ticket['updated_at'] = date('Y-m-d H:i:s');
                 $newTicket = new Ticket();
                 $newTicket->fill($ticket);
+                $newTicket->save();
             }
         }
 
