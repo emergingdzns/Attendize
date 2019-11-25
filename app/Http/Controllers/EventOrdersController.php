@@ -355,7 +355,7 @@ class EventOrdersController extends MyBaseController
 
             $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
 
-                \DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
+                //\DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
                 $yes = strtoupper(trans("basic.yes"));
                 $no = strtoupper(trans("basic.no"));
                 $data = DB::table('orders')
@@ -371,7 +371,7 @@ class EventOrdersController extends MyBaseController
                         \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
                         'orders.amount_refunded',
                         'orders.created_at',
-                    ])->get();
+                    ])->get()->toArray();
                 //DB::raw("(CASE WHEN UNIX_TIMESTAMP(`attendees.arrival_time`) = 0 THEN '---' ELSE 'd' END) AS `attendees.arrival_time`"))
 
                 $sheet->fromArray($data);
