@@ -760,5 +760,10 @@ Route::group(
         }
     ]);
 
+    Route::get('/{slug?}', [
+        'as' => 'publicCustomUrl',
+        'uses' => 'EventViewController@getByUrl'
+    ]);
+
 });
 

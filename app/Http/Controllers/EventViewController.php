@@ -14,6 +14,11 @@ use Validator;
 
 class EventViewController extends Controller
 {
+    public function getByUrl($slug)
+    {
+        $event = Event::findBySlug($slug);
+    }
+
     /**
      * Show the homepage for an event
      *

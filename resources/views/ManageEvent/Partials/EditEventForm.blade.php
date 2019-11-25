@@ -13,6 +13,8 @@
                                         'class'=>'form-control'
                                         ))  !!}
         </div>
+    </div>
+    <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('title', trans("Event.event_title"), array('class'=>'control-label required')) !!}
             {!!  Form::text('title', Input::old('title'),
@@ -21,7 +23,18 @@
                                         'placeholder'=>trans("Event.event_title_placeholder", ["name"=>Auth::user()->first_name])
                                         ))  !!}
         </div>
-
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('slug', 'Custom URL Slug', array('class'=>'control-label required')) !!}
+            {!!  Form::text('slug', Input::old('slug'),
+                                        array(
+                                        'class'=>'form-control',
+                                        'placeholder'=> 'event-title-slug',)
+                                        )  !!}
+        </div>
+    </div>
+    <div class="col-md-12">
         <div class="form-group">
            {!! Form::label('description', trans("Event.event_description"), array('class'=>'control-label')) !!}
             {!!  Form::textarea('description', Input::old('description'),
@@ -170,6 +183,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="col-md-12">
