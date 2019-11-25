@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use File;
 use Illuminate\Http\Request;
+
+use App\Models\Event;
+use App\Models\EventImage;
+use App\Models\Ticket;
+
+use File;
 use Image;
 use Validator;
 
