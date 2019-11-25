@@ -27,13 +27,14 @@ class EventCustomizeController extends MyBaseController
     }
     public function duplicateEvent($event_id)
     {
-        $event = Event::scope()->findOrFail($event_id)->withTrashed();
+        $event = Event::withTrashed()->scope()->findOrFail($event_id);
+        $event = $event->toArray();
 
-        unset($event->id);
-        unset($event->deleted_at);
-        $event->is_live = 0;
-        $event->created_at = date('Y-m-d H:i:s');
-        $event->updated_at = date('Y-m-d H:i:s');
+        unset($event['id']);
+        unset($event['deleted_at']);
+        $event['is_live'] = 0;
+        $event['created_at'] = date('Y-m-d H:i:s');
+        $event['updated_at'] = date('Y-m-d H:i:s');
         $newEvent = new Event();
         $newEvent->fill($event);
         $newEvent->save();
@@ -57,15 +58,16 @@ class EventCustomizeController extends MyBaseController
         $tickets = Ticket::where('event_id',$event->id)->get();
         if (count($tickets) > 0) {
             foreach($tickets as $ticket) {
-                $ticket->event_id = $newEvent->id;
-                $ticket->created_at = date('Y-m-d H:i:s');
-                $ticket->updated_at = date('Y-m-d H:i:s');
+                $ticket = $ticket->toArray();
+                $ticket['event_id'] = $newEvent->id;
+                $ticket['created_at'] = date('Y-m-d H:i:s');
+                $ticket['updated_at'] = date('Y-m-d H:i:s');
                 $newTicket = new Ticket();
                 $newTicket->fill($ticket);
             }
         }
 
-        redirect()->route('showOrganiserEvents',[$event->organiser_id]);
+        redirect()->route('showOrganiserEvents',[$event['organiser_id']]);
     }
 
     /**
