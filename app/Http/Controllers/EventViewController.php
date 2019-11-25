@@ -16,7 +16,7 @@ class EventViewController extends Controller
 {
     public function getByUrl($slug)
     {
-        $event = Event::findBy('slug',$slug);
+        $event = Event::where('slug',$slug)->first();
         return redirect()->route('showEventPage',$event->id);
     }
 
