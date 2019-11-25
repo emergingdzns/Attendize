@@ -65,6 +65,9 @@ class EventCustomizeController extends MyBaseController
                 $ticket = $ticket->toArray();
                 unset($ticket['id']);
                 $ticket['event_id'] = $newEvent->id;
+                $ticket['quantity_sold'] = 0;
+                $ticket['sales_volume'] = 0.00;
+                $ticket['organiser_fees_volume'] = 0.00;
                 $ticket['created_at'] = date('Y-m-d H:i:s');
                 $ticket['updated_at'] = date('Y-m-d H:i:s');
                 $newTicket = new Ticket();
