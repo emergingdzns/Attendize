@@ -72,7 +72,7 @@ class EventCustomizeController extends MyBaseController
             }
         }
 
-        redirect()->route('showOrganiserEvents',[$event['organiser_id']]);
+        return redirect()->route('showOrganiserEvents',[$event['organiser_id']]);
     }
 
     /**
