@@ -24,7 +24,7 @@ class OrganiserEventsController extends MyBaseController
         $searchQuery = $request->get('q');
         $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'start_date');
 
-        if ($request()->has('archived')) {
+        if ($request->has('archived')) {
             $events = $searchQuery
                 ? Event::withTrashed()->scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
                     'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
