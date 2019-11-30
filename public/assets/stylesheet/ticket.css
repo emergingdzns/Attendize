@@ -58,7 +58,7 @@
 .ticket hr {
     border: none;
     border-bottom: 1px solid #ccc;
-    margin: 5px 0;
+    margin: 15px 0 0;
 }
 
 .ticket .barcode {
