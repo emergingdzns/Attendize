@@ -40,5 +40,9 @@ return [
 
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET')
+    ],
+
+    'google' => [
+        'maps' => env('GOOGLE_MAPS_STATIC_KEY')
     ]
 ];
