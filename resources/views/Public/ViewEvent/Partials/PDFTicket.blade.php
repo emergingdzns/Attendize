@@ -77,18 +77,15 @@
                         </div>
                         <div class="layout_even">
                             <h2>{{$event->title}}</h2>
-                            <b>{{$event->start_date->format('m/d/Y h:i a')}}</b><br>
-                            Presented by Cohn Restaurant Group<br>
-
-                            <p>at {{$event->venue_name}}</p>
+                            <b>{{$event->start_date->format('l, F n, Y')}} at {{$event->start_date->format('g:i a')}}</b><br>
+                            Presented by Cohn Restaurant Group at <b>{{$event->venue_name}}</b>
                             @if($event->minimum_age > 0)
-                                <b>This is a {{$event->minimum_age}}+ event
+                                <p></p><b>This is a {{$event->minimum_age}}+ event
                                     @if($event->minimum_age >= 18)
                                         - ID Required
                                     @endif
-                                </b><br>
+                                </b></p>
                             @endif
-                            <br>
 
                             <div class="event_details">
                                 <h4>{{$attendee->first_name.' '.$attendee->last_name}}</h4>
