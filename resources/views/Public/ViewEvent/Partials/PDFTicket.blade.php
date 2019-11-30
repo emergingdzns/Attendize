@@ -74,8 +74,8 @@
                             <div class="cohn_logo">
                                 <img alt="Cohn Logo" src="data:image/png;base64, {{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" />
                             </div>
+                            <hr>
                         </div>
-                        <hr>
                         <div class="layout_even">
                             <h2>{{$event->title}}</h2>
                             <b>{{$event->start_date->format('l, F n, Y')}} at {{$event->start_date->format('g:i a')}}</b><br>
