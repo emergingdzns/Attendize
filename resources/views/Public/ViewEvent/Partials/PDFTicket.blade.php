@@ -74,9 +74,9 @@
                             <div class="cohn_logo">
                                 <img alt="Cohn Logo" src="data:image/png;base64, {{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" />
                             </div>
-                            <hr>
                         </div>
                         <div class="layout_even">
+                            <hr>
                             <h2>{{$event->title}}</h2>
                             <b>{{$event->start_date->format('l, F n, Y')}} at {{$event->start_date->format('g:i a')}}</b><br>
                             Presented by Cohn Restaurant Group at <b>{{$event->venue_name}}</b>
