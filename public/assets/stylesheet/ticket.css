@@ -5,13 +5,11 @@
     width: 700px;
     margin: 0 auto;
     margin-top: 20px;
-    background: #000;
+    background: #fff;
     position: relative;
     height: 330px;
     font-size: 16px;
     color: #333;
-    border-left-width: 3px;
-    border-left-color: #000;
     overflow: hidden;
 }
 
@@ -108,7 +106,6 @@
     position: absolute;
     right: 0px;
     top: 0px;
-    border: 1px solid #000;
     border-top: none;
     border-right: none;
     padding: 5px;
@@ -116,8 +113,8 @@
 }
 
 .ticket .logo img {
-    max-width: 193px;
-    max-height: 293px;
+    max-width: 233px;
+    max-height: 343px;
 }
 
 .ticket .foot {

@@ -32,21 +32,31 @@
 
 
             .ticket {
+                /*
                 border: 1px solid {{$event->ticket_border_color}} !important;
                 background: {{$event->ticket_bg_color}} !important;
                 color: {{$event->ticket_sub_text_color}} !important;
                 border-left-color: {{$event->ticket_border_color}} !important;
+                */
                 page-break-after: always;
             }
-            .ticket h4 {color: {{$event->ticket_text_color}} !important;}
+            .ticket h4 {
+                /*
+                color: {{$event->ticket_text_color}} !important;
+                */
+            }
             .ticket .logo {
+                /*
                 border-left: 1px solid {{$event->ticket_border_color}} !important;
                 border-bottom: 1px solid {{$event->ticket_border_color}} !important;
+                */
             }
             .ticket .barcode {
+                /*
                 border-right: 1px solid {{$event->ticket_border_color}} !important;
                 border-bottom: 1px solid {{$event->ticket_border_color}} !important;
                 border-top: 1px solid {{$event->ticket_border_color}} !important;
+                */
             }
 
         </style>
