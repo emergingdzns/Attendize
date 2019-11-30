@@ -113,7 +113,7 @@
                                 @endif
                             </div>
                             <div class="left_half">
-                                image of map<br>
+                                <img width="350" height="350" src="https://maps.googleapis.com/maps/api/staticmap?center=Albany,+NY&zoom=13&scale=1&size=300x300&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of Albany, NY">
                                 <div class="disclaimer">
                                     <p>
                                         This ticket is valid only for the event for which it was issued. This ticket is
