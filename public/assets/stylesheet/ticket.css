@@ -19,6 +19,7 @@
 
 .logo_row {
     width: 100%;
+    position:relative;
 }
 .logo_row .organizer_logo {
     position:absolute;
@@ -98,10 +99,8 @@
 }
 
 .ticket .layout_even {
-    position:absolute;
-    top:100px;
+    position:relative;
     height:300px;
-    left: 0;
     width: 700px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
