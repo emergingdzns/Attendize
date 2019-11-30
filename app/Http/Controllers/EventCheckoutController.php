@@ -818,7 +818,7 @@ class EventCheckoutController extends Controller
             abort(404);
         }
         $images = [];
-        $imgs = $order->event->images;
+        $imgs = $order->event->ticket_images;
         foreach ($imgs as $img) {
             $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
         }

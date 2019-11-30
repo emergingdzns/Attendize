@@ -36,6 +36,7 @@
                 background: {{$event->ticket_bg_color}} !important;
                 color: {{$event->ticket_sub_text_color}} !important;
                 border-left-color: {{$event->ticket_border_color}} !important;
+                page-break-after: always;
             }
             .ticket h4 {color: {{$event->ticket_text_color}} !important;}
             .ticket .logo {
@@ -56,9 +57,7 @@
             @foreach($attendees as $attendee)
                 @if(!$attendee->is_cancelled)
                     <div class="ticket">
-
                         <div class='logo'>
-                            <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
                             @if(count($images)>0)
                                 @foreach($images as $img)
                                     <BR><img src="data:image/png;base64, {{$img}}" />
@@ -67,8 +66,18 @@
                         </div>
                         <div class="layout_even">
                             <div class="event_details">
+                                <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
                                 <h4>@lang("Ticket.event")</h4>
                                 {{$event->title}}
+                                @if($event->minimum_age > 0)
+                                <br>
+                                <b>This is a {{$event->minimum_age}}+ event
+                                    @if($event->minimum_age >= 18)
+                                        - ID Required
+                                    @endif
+                                </b>
+                                @endif
+
                                 <h4>Event Date</h4>
                                 {{$event->start_date->format('m/d/Y h:i a')}}
                                 <h4>Location</h4>
@@ -105,11 +114,6 @@
                     </div>
                 @endif
             @endforeach
-
-            <div class="bottom_info">
-                {{--Attendize is provided free of charge on the condition the below hyperlink is left in place.--}}
-                {{--See https://www.attendize.com/licence.php for more information.--}}
-            </div>
         </div>
     </body>
 </html>

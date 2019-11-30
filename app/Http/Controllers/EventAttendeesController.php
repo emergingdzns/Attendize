@@ -856,6 +856,12 @@ class EventAttendeesController extends MyBaseController
     {
         $attendee = Attendee::scope()->findOrFail($attendee_id);
 
+        $images = [];
+        $imgs = $attendee->event->ticket_images;
+        foreach ($imgs as $img) {
+            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
+        }
+
         $data = [
             'order'     => $attendee->order,
             'event'     => $attendee->event,
@@ -863,6 +869,7 @@ class EventAttendeesController extends MyBaseController
             'attendees' => [$attendee],
             'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
             'image'     => base64_encode(file_get_contents(public_path($attendee->event->organiser->full_logo_path))),
+            'images'    => $images
 
         ];
 

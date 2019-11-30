@@ -30,11 +30,18 @@ class QueueHandler
          *   3 Generate /  Send Tickets
          */
 
+        $images = [];
+        $imgs = $order->event->ticket_images;
+        foreach ($imgs as $img) {
+            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
+        }
+
         $data = [
             'order'     => $order,
             'event'     => $order->event,
             'tickets'   => $order->event->tickets,
             'attendees' => $order->attendees,
+            'images'    => $images
         ];
 
         $pdf_file = storage_path() . '/' . $order->order_reference;

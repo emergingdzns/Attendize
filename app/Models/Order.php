@@ -138,6 +138,13 @@ class Order extends MyBaseModel
      */
     public function generatePdfTickets()
     {
+
+        $images = [];
+        $imgs = $this->event->ticket_images;
+        foreach ($imgs as $img) {
+            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
+        }
+
         $data = [
             'order'     => $this,
             'event'     => $this->event,
@@ -145,6 +152,7 @@ class Order extends MyBaseModel
             'attendees' => $this->attendees,
             'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
             'image'     => base64_encode(file_get_contents(public_path($this->event->organiser->full_logo_path))),
+            'images'    => $images
         ];
 
         $pdf_file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $this->order_reference;

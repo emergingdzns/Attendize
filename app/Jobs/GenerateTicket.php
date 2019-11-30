@@ -61,7 +61,7 @@ class GenerateTicket extends Job implements ShouldQueue
 
         $image_path = $event->organiser->full_logo_path;
         $images = [];
-        $imgs = $order->event->images;
+        $imgs = $order->event->ticket_images;
         foreach ($imgs as $img) {
             $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
         }
