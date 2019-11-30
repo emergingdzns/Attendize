@@ -67,6 +67,16 @@
             @foreach($attendees as $attendee)
                 @if(!$attendee->is_cancelled)
                     <div class="ticket">
+                        <div class="logo_row">
+                            <div class="organizer_logo">
+                                <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
+                            </div>
+                            <div class="cohn_logo">
+                                <img alt="{{public_path('assets/images/CRG_Logo_Stack2_BW.jpg')}}" src="data:image/png;base64, {{$image}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ticket">
                         <div class='logo'>
                             @if(count($images)>0)
                                 @foreach($images as $img)
@@ -75,7 +85,7 @@
                             @endif
                         </div>
                         <div class="layout_even">
-                            <div><img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" /></div>
+                            <div></div>
                             <div class="event_details">
                                 <h4>@lang("Ticket.event")</h4>
                                 {{$event->title}}

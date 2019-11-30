@@ -1,13 +1,13 @@
 .ticket {
     /*page-break-after: always;*/
     padding: 10px;
-    border: 1px solid #aaa;
+    /*border: 1px solid #aaa;*/
     width: 700px;
     margin: 0 auto;
     margin-top: 20px;
     background: #fff;
     position: relative;
-    height: 330px;
+    min-height: 330px;
     font-size: 16px;
     color: #333;
     overflow: hidden;
@@ -15,6 +15,32 @@
 
 .ticket table {
     width: 100%;
+}
+
+.logo_row {
+    width: 100%;
+}
+.logo_row .organizer_logo {
+    position:absolute;
+    left: 0;
+    top: 0;
+    width: 225px;
+    height: 100px;
+}
+.organizer_logo img {
+    max-width: 225px;
+    max-height: 100px;
+}
+.logo_row .cohn_logo {
+    position:absolute;
+    right: 0;
+    top: 0;
+    width: 475px;
+    height: 100px;
+}
+.cohn_logo img {
+    max-width: 475px;
+    max-height: 100px;
 }
 
 .ticket h1 {
@@ -61,7 +87,7 @@
 
 .ticket h4 {
     font-size: 17px;
-    margin: 6px auto;
+    margin: 14px auto;
     text-transform: uppercase;
     color: #333;
 }
