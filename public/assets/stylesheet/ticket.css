@@ -120,21 +120,22 @@
     width:700px;
 }
 .bottom_section .left_half {
-    width: 320px;
+    width: 350px;
     height: 500px;
 }
 .bottom_section .right_half {
     float:right;
-    width: 320px;
+    width: 290px;
     height: 500px;
 }
 .right_half img {
-    max-width:350px;
+    max-width: 290px;
     max-height: 500px;
     float: right;
 }
 .disclaimer {
-    font-size: 10px;
+    padding: 5px;
+    font-size: 8px;
     border: 1px solid #000;
 }
 
