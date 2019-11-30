@@ -149,60 +149,6 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="ticket">
-                        <div class='logo'>
-
-                        </div>
-                        <div class="layout_even">
-                            <div></div>
-                            <div class="event_details">
-                                <h4>@lang("Ticket.event")</h4>
-                                {{$event->title}}
-                                @if($event->minimum_age > 0)
-                                <br>
-                                <b>This is a {{$event->minimum_age}}+ event
-                                    @if($event->minimum_age >= 18)
-                                        - ID Required
-                                    @endif
-                                </b>
-                                @endif
-
-
-                                <h4>Event Date</h4>
-                                {{$event->start_date->format('m/d/Y h:i a')}}
-                                <h4>Location</h4>
-                                {{$event->venue_name}}
-                            </div>
-
-                            <div class="attendee_details">
-                                <h4>@lang("Ticket.name")</h4>
-                                {{$attendee->first_name.' '.$attendee->last_name}}
-                                <h4>@lang("Ticket.ticket_type")</h4>
-                            	{{$attendee->ticket->title}}
-                                <h4>@lang("Ticket.price")</h4>
-								@php
-	                            	// Calculating grand total including tax
-					                $grand_total = $attendee->ticket->total_price;
-					                $tax_amt = ($grand_total * $event->organiser->tax_value) / 100;
-					                $grand_total = $tax_amt + $grand_total;
-	                            @endphp
-	                            {{money($grand_total, $order->event->currency)}}
-                                <h4>Order #</h4>
-                                {{$order->order_reference}}
-                            </div>
-			            </div>
-                        {{--
-                        <div class="barcode">
-                            {!! DNS2D::getBarcodeSVG($attendee->private_reference_number, "QRCODE", 6, 6) !!}
-                        </div>
-                        @if($event->is_1d_barcode_enabled)
-                        <div class="barcode_vertical">
-                            {!! DNS1D::getBarcodeSVG($attendee->private_reference_number, "C39+", 1, 50) !!}
-                        </div>
-                        @endif
-                        --}}
                     </div>
                 @endif
             @endforeach
