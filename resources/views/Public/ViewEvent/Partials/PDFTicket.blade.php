@@ -103,6 +103,9 @@
                                 Ticket Price: {{money($grand_total, $order->event->currency)}}
                             </div>
                         </div>
+                        <div>
+                            <hr>
+                        </div>
                     </div>
                     <div class="ticket">
                         <div class='logo'>
