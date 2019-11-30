@@ -75,6 +75,36 @@
                                 <img alt="Cohn Logo" src="data:image/png;base64, {{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" />
                             </div>
                         </div>
+                        <div class="layout_even">
+                            <h2>{{$event->title}}</h2>
+                            <b>{{$event->start_date->format('m/d/Y h:i a')}}</b><br>
+                            Presented by Cohn Restaurant Group<br>
+
+                            <p>{{$event->venue_name}}</p>
+                            @if($event->minimum_age > 0)
+                                <b>This is a {{$event->minimum_age}}+ event
+                                    @if($event->minimum_age >= 18)
+                                        - ID Required
+                                    @endif
+                                </b><br>
+                            @endif
+                            <br>
+
+                            <div class="event_details">
+                                <h4>{{$attendee->first_name.' '.$attendee->last_name}}</h4>
+                                Order # {{$order->order_reference}}
+                            </div>
+                            <div class="attendee_details">
+                                <h4>{{$attendee->ticket->title}}</h4>
+                                @php
+                                    // Calculating grand total including tax
+                                    $grand_total = $attendee->ticket->total_price;
+                                    $tax_amt = ($grand_total * $event->organiser->tax_value) / 100;
+                                    $grand_total = $tax_amt + $grand_total;
+                                @endphp
+                                @lang("Ticket.price") {{money($grand_total, $order->event->currency)}}
+                            </div>
+                        </div>
                     </div>
                     <div class="ticket">
                         <div class='logo'>
@@ -97,6 +127,7 @@
                                     @endif
                                 </b>
                                 @endif
+
 
                                 <h4>Event Date</h4>
                                 {{$event->start_date->format('m/d/Y h:i a')}}

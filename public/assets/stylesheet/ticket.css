@@ -25,22 +25,23 @@
     left: 0;
     top: 0;
     width: 225px;
-    height: 100px;
+    height: 90px;
 }
 .organizer_logo img {
     max-width: 225px;
-    max-height: 70px;
+    max-height: 90px;
 }
 .logo_row .cohn_logo {
     position:absolute;
     right: 0;
     top: 0;
     width: 475px;
-    height: 100px;
+    height: 90px;
 }
 .cohn_logo img {
     max-width: 475px;
     max-height: 70px;
+    float: right;
 }
 
 .ticket h1 {
