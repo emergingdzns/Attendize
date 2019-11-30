@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketImageTable extends Migration
+class CreateTicketImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTicketImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket_image', function (Blueprint $table) {
+        Schema::create('ticket_images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image_path');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateTicketImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket_image');
+        Schema::dropIfExists('ticket_images');
     }
 }
