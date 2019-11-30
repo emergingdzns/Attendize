@@ -100,8 +100,8 @@
 }
 
 .ticket .layout_even {
-    position:absolute;
-    top:70%;
+    position:relative;
+    margin-top:100px;
     height:300px;
     left: 0;
     width: 700px;
