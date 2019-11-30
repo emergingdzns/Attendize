@@ -125,11 +125,11 @@
 }
 .bottom_section .right_half {
     float:right;
-    width: 290px;
+    width: 330px;
     height: 500px;
 }
 .right_half img {
-    max-width: 290px;
+    max-width: 330px;
     max-height: 500px;
     float: right;
 }
