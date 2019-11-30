@@ -122,7 +122,7 @@
 }
 
 .ticket .event_details {
-    left: 10px;
+    left: 0px;
     overflow: hidden;
     max-width: 225px;
     text-overflow: ellipsis;
@@ -131,7 +131,7 @@
 .ticket .attendee_details {
     left: 235px;
     overflow: hidden;
-    max-width: 195px;
+    max-width: 475px;
     text-overflow: ellipsis;
 }
 
