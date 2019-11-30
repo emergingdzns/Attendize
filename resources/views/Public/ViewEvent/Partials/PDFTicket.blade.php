@@ -103,17 +103,57 @@
                                 Ticket Price: {{money($grand_total, $order->event->currency)}}
                             </div>
                         </div>
-                        <div>
-                            <hr>
+
+                        <div class="bottom_section">
+                            <div class="left_half">
+                                image of map<br>
+                                <div class="disclaimer">
+                                    <p>
+                                        This ticket is valid only for the event for which it was issued. This ticket is
+                                        subject to revocation with denial of admission or removal from the facility
+                                        without compensation at management's discretion should the holder act in a
+                                        disorderly manner or violate management's rules or regulations. Admission may be
+                                        declined upon a refund for the purchase price of the ticket. Holder agrees not
+                                        to transmit or aid in transmitting any description or picture of this event.
+                                        Breach of the foregoing terminates this license. Holder grants permission to the
+                                        facility and organization sponsoring or promoting this event and their designees
+                                        to utilize the holder's image or likeness in connection with any broadcast or
+                                        other reproduction of this event. The resale or attempted resale of this ticket
+                                        at a price higher that appearing hereon is grounds for seizure and cancellation
+                                        of this ticket without compensation. Tickets obtained from unauthorized sources
+                                        may be lost, stolen or counterfeit and if so, are void. Holder voluntarily
+                                        assumes all risks and dangers incidental to the event for which this ticket is
+                                        issued, whether occurring prior to, during or after the event, including,
+                                        without limitation, injury, injury from objects, acts of others, etc., and
+                                        holder agrees that the facility, promoter, organization, agents, participants,
+                                        sponsors, Cohn Restaurant Group and/or related persons are not responsible or
+                                        liable for any injuries, expenses, claims or liabilities resulting from such
+                                        causes. Service fees are not refundable under any circumstances. This ticket is
+                                        not transferable. It is against the law to reproduce or attempt reproduction of
+                                        this ticket. Price includes all applicable taxes. Cohn Restaurant Group will not
+                                        be held liable for amenities promised by promoters, VIP or otherwise. Event
+                                        date, time, location and talent are subject to change.
+                                    </p>
+                                    <p>
+                                        NO REFUNDS. ALL SALES ARE FINAL, UNLESS THE EVENT IS CANCELLED OR POSTPONED IN
+                                        WHICH CASE THE HOLDER IS ELIGIBLE FOR A REFUND FOR THE FACE VALUE OF THE TICKET.
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="right_half">
+                                @if(count($images)>0)
+                                    @foreach($images as $img)
+                                        <img src="data:image/png;base64, {{$img}}" />
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
+
                     </div>
                     <div class="ticket">
                         <div class='logo'>
-                            @if(count($images)>0)
-                                @foreach($images as $img)
-                                    <BR><img src="data:image/png;base64, {{$img}}" />
-                                @endforeach
-                            @endif
+
                         </div>
                         <div class="layout_even">
                             <div></div>
