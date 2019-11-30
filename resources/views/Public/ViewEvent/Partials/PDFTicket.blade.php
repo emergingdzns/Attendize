@@ -75,6 +75,7 @@
                                 <img alt="Cohn Logo" src="data:image/png;base64, {{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" />
                             </div>
                         </div>
+                        <hr>
                         <div class="layout_even">
                             <h2>{{$event->title}}</h2>
                             <b>{{$event->start_date->format('l, F n, Y')}} at {{$event->start_date->format('g:i a')}}</b><br>
@@ -99,7 +100,7 @@
                                     $tax_amt = ($grand_total * $event->organiser->tax_value) / 100;
                                     $grand_total = $tax_amt + $grand_total;
                                 @endphp
-                                @lang("Ticket.price") {{money($grand_total, $order->event->currency)}}
+                                Ticket Price: {{money($grand_total, $order->event->currency)}}
                             </div>
                         </div>
                     </div>
