@@ -116,7 +116,7 @@
 
 .ticket .bottom_section {
     position:relative;
-    top: 100%;
+    margin-top: 400px;
     height: 500px;
 }
 .bottom_section .left_half {
