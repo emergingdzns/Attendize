@@ -120,16 +120,16 @@
     width:700px;
 }
 .bottom_section .left_half {
-    width: 350px;
+    width: 340px;
     height: 500px;
 }
 .bottom_section .right_half {
     float:right;
-    width: 330px;
+    width: 340px;
     height: 500px;
 }
 .right_half img {
-    max-width: 330px;
+    max-width: 340px;
     max-height: 500px;
     float: right;
 }
