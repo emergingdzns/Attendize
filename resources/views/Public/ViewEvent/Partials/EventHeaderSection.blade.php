@@ -28,6 +28,10 @@
     <b property="name">{{$event->venue_name}}</b>
     <meta property="address" content="{{ urldecode($event->venue_name) }}">
 </span>
+@if($event->minimum_age > 0)
+    <p>This is a {{$event->minimum_age}}+ event. All attendees must be at least {{$event->minimum_age}} years old on the day of the event.</p>
+@endif
+
 </div>
 
 <div class="event_buttons">
