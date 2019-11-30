@@ -65,8 +65,8 @@
                             @endif
                         </div>
                         <div class="layout_even">
+                            <div><img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" /></div>
                             <div class="event_details">
-                                <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
                                 <h4>@lang("Ticket.event")</h4>
                                 {{$event->title}}
                                 @if($event->minimum_age > 0)
