@@ -65,6 +65,7 @@ class GenerateTicket extends Job implements ShouldQueue
         foreach ($imgs as $img) {
             $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
         }
+        //$map = base64_encode(file_get_contents('https://maps.googleapis.com/maps/api/staticmap?center=Albany,+NY&zoom=13&scale=1&size=300x300&maptype=roadmap&format=png&visual_refresh=true'));
 
         $data = [
             'order'     => $order,
