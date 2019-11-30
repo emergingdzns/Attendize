@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\EventImage;
 use App\Models\Organiser;
+use App\Models\TicketImage;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -278,6 +279,8 @@ class EventController extends MyBaseController
             EventImage::where('event_id', '=', $event->id)->delete();
         }
 
+        $event->minimum_age = $request->get('minimum_age');
+
         $event->save();
 
         if ($request->hasFile('event_image')) {
@@ -306,6 +309,35 @@ class EventController extends MyBaseController
             $eventImage->event_id = $event->id;
             $eventImage->save();
         }
+
+
+        if ($request->hasFile('ticket_image')) {
+            $path = public_path() . '/' . config('attendize.event_images_path');
+            $filename = 'ticket_image-' . md5(time() . $event->id) . '.' . strtolower($request->file('ticket_image')->getClientOriginalExtension());
+
+            $file_full_path = $path . '/' . $filename;
+
+            $request->file('ticket_image')->move($path, $filename);
+
+            $img = Image::make($file_full_path);
+
+            $img->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $img->save($file_full_path);
+
+            \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($file_full_path));
+
+            TicketImage::where('event_id', '=', $event->id)->delete();
+
+            $ticketImage = TicketImage::createNew();
+            $ticketImage->image_path = config('attendize.event_images_path') . '/' . $filename;
+            $ticketImage->event_id = $event->id;
+            $ticketImage->save();
+        }
+
 
         return response()->json([
             'status'      => 'success',

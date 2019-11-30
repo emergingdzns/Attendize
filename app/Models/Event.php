@@ -25,6 +25,7 @@ class Event extends MyBaseModel
         'end_date'            => ['required'],
         'organiser_name'      => ['required_without:organiser_id'],
         'event_image'         => ['mimes:jpeg,jpg,png', 'max:3000'],
+        'event_ticket_image'  => ['mimes:jpeg,jpg,png', 'max:3000'],
     ];
 
     /**
@@ -36,7 +37,9 @@ class Event extends MyBaseModel
         'title.required'                       => 'You must at least give a title for your event.',
         'organiser_name.required_without'      => 'Please create an organiser or select an existing organiser.',
         'event_image.mimes'                    => 'Please ensure you are uploading an image (JPG, PNG, JPEG)',
-        'event_image.max'                      => 'Pleae ensure the image is not larger then 3MB',
+        'event_image.max'                      => 'Please ensure the image is not larger then 3MB',
+        'event_ticket_image.mimes'             => 'Please ensure you are uploading an image for the ticket (JPG, PNG, JPEG)',
+        'event_ticket_image.max'               => 'Please ensure the ticket image is not larger then 3MB',
         'location_venue_name.required_without' => 'Please enter a venue for your event',
         'venue_name_full.required_without'     => 'Please enter a venue for your event',
     ];
@@ -53,7 +56,7 @@ class Event extends MyBaseModel
                            'ticket_text_color','ticket_sub_text_color','social_show_whatsapp','questions_collection_type',
                            'checkout_timeout_after','is_1d_barcode_enabled','enable_offline_payments','charge_tax',
                            'offline_payment_instructions','gratuity_fixed','gratuity_percentage','organiser_name',
-                           'bg_image_path'];
+                           'bg_image_path','minimum_age'];
 
     /**
      * The questions associated with the event.
@@ -93,6 +96,16 @@ class Event extends MyBaseModel
     public function images()
     {
         return $this->hasMany(\App\Models\EventImage::class);
+    }
+
+    /**
+     * The ticket images associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticket_images()
+    {
+        return $this->hasMany(\App\Models\TicketImage::class);
     }
 
     /**

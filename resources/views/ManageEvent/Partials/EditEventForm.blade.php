@@ -3,12 +3,24 @@
 {!! Form::model($event, array('url' => route('postEditEvent', ['event_id' => $event->id]), 'class' => 'ajax gf')) !!}
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('is_live', trans("Event.event_visibility"), array('class'=>'control-label required')) !!}
             {!!  Form::select('is_live', [
             '1' => trans("Event.vis_public"),
             '0' => trans("Event.vis_hide")],null,
+                                        array(
+                                        'class'=>'form-control'
+                                        ))  !!}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('minimum_age', 'Minimum Age', array('class'=>'control-label required')) !!}
+            {!!  Form::select('minimum_age', [
+            '0' => 'Not Applicable / No Age Restriction',
+            '18' => '18 Years Old',
+            '21' => '21 Years Old'],null,
                                         array(
                                         'class'=>'form-control'
                                         ))  !!}
@@ -164,8 +176,6 @@
                    {!! Form::label('event_image', trans("Event.event_flyer"), array('class'=>'control-label ')) !!}
                    {!! Form::styledFile('event_image', 1) !!}
                 </div>
-            </div>
-            <div class="col-md-6">
                 <div class="float-l">
                     @if($event->images->count())
                     {!! Form::label('', trans("Event.current_event_flyer"), array('class'=>'control-label ')) !!}
@@ -179,6 +189,26 @@
                     <div class="thumbnail">
                        {!!HTML::image('/'.$event->images->first()['image_path'])!!}
                     </div>
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('ticket_image', 'Image for Ticket', array('class'=>'control-label ')) !!}
+                    {!! Form::styledFile('ticket_image', 1) !!}
+                </div>
+                <div class="float-l">
+                    @if($event->ticket_images->count())
+                        {!! Form::label('', 'Current Ticket Image', array('class'=>'control-label ')) !!}
+                        <div class="form-group">
+                            <div class="well well-sm well-small">
+                                {!! Form::label('remove_current_ticket_image', 'Delete?', array('class'=>'control-label ')) !!}
+                                {!! Form::checkbox('remove_current_ticket_image') !!}
+                            </div>
+                        </div>
+                        <div class="thumbnail">
+                            {!!HTML::image('/'.$event->ticket_images->first()['image_path'])!!}
+                        </div>
                     @endif
                 </div>
             </div>
