@@ -123,8 +123,7 @@
     height: 500px;
 }
 .bottom_section .right_half {
-    position:absolute;
-    right: 0;
+    float:right;
     width: 350px;
     height: 500px;
 }
