@@ -117,14 +117,15 @@
 .ticket .bottom_section {
     position:relative;
     height: 500px;
+    width:700px;
 }
 .bottom_section .left_half {
-    width: 350px;
+    width: 320px;
     height: 500px;
 }
 .bottom_section .right_half {
     float:right;
-    width: 350px;
+    width: 320px;
     height: 500px;
 }
 .right_half img {
