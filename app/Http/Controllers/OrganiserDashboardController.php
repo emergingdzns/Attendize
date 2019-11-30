@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organiser;
+use App\Models\Event;
 use Carbon\Carbon;
 
 class OrganiserDashboardController extends MyBaseController
@@ -16,7 +17,11 @@ class OrganiserDashboardController extends MyBaseController
     public function showDashboard($organiser_id)
     {
         $organiser = Organiser::scope()->findOrFail($organiser_id);
-        $upcoming_events = $organiser->events()->where('end_date', '>=', Carbon::now())->get();
+        if ($organiser_id == 1) {
+            $upcoming_events = Event::where('end_date', '>=', Carbon::now())->get();
+        } else {
+            $upcoming_events = $organiser->events()->where('end_date', '>=', Carbon::now())->get();
+        }
         $calendar_events = [];
 
         /* Prepare JSON array for events for use in the dashboard calendar */

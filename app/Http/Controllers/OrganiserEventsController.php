@@ -24,16 +24,30 @@ class OrganiserEventsController extends MyBaseController
         $searchQuery = $request->get('q');
         $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'start_date');
 
-        if ($request->has('archived')) {
-            $events = $searchQuery
-                ? Event::withTrashed()->scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
-                    'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
-                : Event::withTrashed()->scope()->where('organiser_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
+        if ($organiser_id == 1) {
+            if ($request->has('archived')) {
+                $events = $searchQuery
+                    ? Event::withTrashed()->scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
+                        'desc')->paginate(12)
+                    : Event::withTrashed()->scope()->orderBy($sort_by, 'desc')->paginate(12);
+            } else {
+                $events = $searchQuery
+                    ? Event::scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
+                        'desc')->paginate(12)
+                    : Event::scope()->orderBy($sort_by, 'desc')->paginate(12);
+            }
         } else {
-            $events = $searchQuery
-                ? Event::scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
-                    'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
-                : Event::scope()->where('organiser_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
+            if ($request->has('archived')) {
+                $events = $searchQuery
+                    ? Event::withTrashed()->scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
+                        'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
+                    : Event::withTrashed()->scope()->where('organiser_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
+            } else {
+                $events = $searchQuery
+                    ? Event::scope()->where('title', 'like', '%' . $searchQuery . '%')->orderBy($sort_by,
+                        'desc')->where('organiser_id', '=', $organiser_id)->paginate(12)
+                    : Event::scope()->where('organiser_id', '=', $organiser_id)->orderBy($sort_by, 'desc')->paginate(12);
+            }
         }
 
         $data = [
