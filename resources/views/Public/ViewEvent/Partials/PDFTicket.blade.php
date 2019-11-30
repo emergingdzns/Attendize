@@ -105,6 +105,13 @@
                         </div>
 
                         <div class="bottom_section">
+                            <div class="right_half">
+                                @if(count($images)>0)
+                                    @foreach($images as $img)
+                                        <img src="data:image/png;base64, {{$img}}" />
+                                    @endforeach
+                                @endif
+                            </div>
                             <div class="left_half">
                                 image of map<br>
                                 <div class="disclaimer">
@@ -140,13 +147,6 @@
                                     </p>
 
                                 </div>
-                            </div>
-                            <div class="right_half">
-                                @if(count($images)>0)
-                                    @foreach($images as $img)
-                                        <img src="data:image/png;base64, {{$img}}" />
-                                    @endforeach
-                                @endif
                             </div>
                         </div>
 
