@@ -80,7 +80,7 @@
                             <b>{{$event->start_date->format('m/d/Y h:i a')}}</b><br>
                             Presented by Cohn Restaurant Group<br>
 
-                            <p>{{$event->venue_name}}</p>
+                            <p>at {{$event->venue_name}}</p>
                             @if($event->minimum_age > 0)
                                 <b>This is a {{$event->minimum_age}}+ event
                                     @if($event->minimum_age >= 18)

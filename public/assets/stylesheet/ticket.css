@@ -49,6 +49,10 @@
     margin-top: 0px;
 }
 
+.ticket h2 {
+    font-size: 30px;
+}
+
 .ticket hr {
     border: none;
     border-bottom: 1px solid #ccc;
@@ -88,17 +92,17 @@
 
 .ticket h4 {
     font-size: 17px;
-    margin: 14px auto;
+    margin: 14px auto 7px;
     text-transform: uppercase;
     color: #333;
 }
 
 .ticket .layout_even {
     position:absolute;
-    top:50%;
+    top:100px;
     height:300px;
     left: 0;
-    width: 470px;
+    width: 700px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
