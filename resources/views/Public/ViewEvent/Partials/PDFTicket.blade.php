@@ -72,7 +72,7 @@
                                 <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
                             </div>
                             <div class="cohn_logo">
-                                <img alt="{{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" src="data:image/png;base64, {{$image}}" />
+                                <img alt="Cohn Logo" src="data:image/png;base64, {{base64_encode(file_get_contents(public_path('assets/images/CRG_Logo_Stack2_BW.jpg')))}}" />
                             </div>
                         </div>
                     </div>
