@@ -113,7 +113,7 @@
                                 @endif
                             </div>
                             <div class="left_half">
-                                <img width="320" height="200" src="https://maps.googleapis.com/maps/api/staticmap?center=880+Harbor+Island,+San+Diego,+CA&zoom=15&scale=2&size=320x200&maptype=roadmap&key={{config('services.google.maps')}}&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xf98500%7Clabel:1%7C{{urlencode($event->venue_name)}}" alt="Map to {{$event->venue_name}}">
+                                <img width="320" height="200" src="https://maps.googleapis.com/maps/api/staticmap?center={{$event->map_address}}&zoom=15&scale=2&size=320x200&maptype=roadmap&key={{config('services.google.maps')}}&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xf98500%7Clabel:1%7C{{urlencode($event->venue_name)}}" alt="Map to {{$event->venue_name}}">
                                 <div class="disclaimer">
                                     <p>
                                         This ticket is valid only for the event for which it was issued. This ticket is
