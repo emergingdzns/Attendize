@@ -111,11 +111,11 @@
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     border-bottom: 1px solid #ccc;
-    margin-bottom: 15px;
 }
 
 .ticket .bottom_section {
     position:relative;
+    margin-top: -100px;
     height: 500px;
     width:700px;
 }
